@@ -1,4 +1,6 @@
 import logo_header from "../../images/logo_header.svg";
+import "./Header.css";
+import Navigation from "../Navigation/Navigation";
 
 function Header() {
   return (
@@ -8,6 +10,7 @@ function Header() {
         alt="логотип приложения"
         className="header__logo"
       />
+      <Navigation isLoggedIn={true} />
     </header>
   );
 }

@@ -18,6 +18,6 @@
   /* position: relative; */
 
   /* всегда показывать вертикальный скролл */
-  overflow: -moz-scrollbars-vertical;
-  overflow-y: scroll;
+  /* overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll; */
 }
