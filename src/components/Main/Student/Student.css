@@ -1,0 +1,62 @@
+.student {
+  padding: 110px 0 0;
+}
+
+.student__info {
+  margin-top: 66px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.student__bio {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.student__name {
+  margin: 0;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -2px;
+}
+
+.student__short {
+  margin: 0;
+  margin-top: 18px;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.student__description {
+  margin: 0;
+  margin-top: 26px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.student__github {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 99px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.student__github:hover {
+  opacity: 0.7;
+}
+
+.student__photo {
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+  /* background: url(<path-to-image>), lightgray 50% / cover no-repeat; */
+}
