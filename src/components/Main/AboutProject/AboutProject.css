@@ -1,0 +1,72 @@
+.about {
+  padding: 110px 70px;
+}
+
+.about__list {
+  margin: 0;
+  padding: 70px 0 0 0;
+  column-count: 2;
+  gap: 40px;
+  list-style: none;
+}
+
+.about__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.8px;
+}
+
+.about__text {
+  margin: 0;
+  padding-top: 26px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.about__timing {
+  width: 100%;
+  margin-top: 110px;
+  display: flex;
+}
+
+.about__week {
+  text-align: center;
+}
+
+.about__week_type_first {
+  flex-basis: 228px;
+}
+
+.about__week_type_other {
+  flex-grow: 1;
+  flex-basis: calc(100%-228px);
+}
+
+.about__week-lasts {
+  display: block;
+  height: 36px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.about__week-lasts_type_first {
+  color: var(--color-black);
+  background-color: var(--color-green);
+}
+
+.about__week-lasts_type_other {
+  color: var(--color-white);
+  background-color: var(--color-gray);
+}
+
+.about__week-title {
+  display: block;
+  margin-top: 14px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: var(--color-light-gray);
+}

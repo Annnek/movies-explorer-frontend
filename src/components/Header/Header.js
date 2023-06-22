@@ -1,16 +1,24 @@
 import logo_header from "../../images/logo_header.svg";
-import "./Header.css";
-import Navigation from "../Navigation/Navigation";
+import { NavLink, Link } from "react-router-dom";
 
 function Header() {
   return (
     <header className="header">
-      <img
-        src={logo_header}
-        alt="логотип приложения"
-        className="header__logo"
-      />
-      <Navigation isLoggedIn={true} />
+      <NavLink to="/" exact>
+        <img
+          src={logo_header}
+          alt="логотип приложения"
+          className="header__logo"
+        />
+      </NavLink>
+      <div className="header__entrance">
+        <Link to="/signup" className="header__link">
+          Регистрация
+        </Link>
+        <Link to="/signin" className="header__button">
+          Войти
+        </Link>
+      </div>
     </header>
   );
 }
