@@ -12,8 +12,9 @@
 
 .about__title {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 400;
+  line-height: 22px;
   letter-spacing: -0.8px;
 }
 
@@ -27,7 +28,7 @@
 
 .about__timing {
   width: 100%;
-  margin-top: 110px;
+  padding-top: 110px;
   display: flex;
 }
 
@@ -45,7 +46,9 @@
 }
 
 .about__week-lasts {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 36px;
   font-weight: 400;
   font-size: 14px;
@@ -69,4 +72,75 @@
   font-size: 14px;
   line-height: 17px;
   color: var(--color-light-gray);
+}
+
+@media screen and (max-width: 768px) {
+  .about {
+    padding: 90px 50px;
+  }
+
+  .about__list {
+    gap: 30px;
+  }
+
+  .about__text {
+    padding-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about__timing {
+    padding-top: 93px;
+  }
+
+  .about__week_type_first {
+    flex-basis: 140px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about {
+    padding: 70px 18px;
+  }
+
+  .about__list {
+    padding: 4px 0 0 0;
+    column-count: 1;
+  }
+
+  .about__title {
+    padding-top: 56px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .about__text {
+    padding-top: 16px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about__timing {
+    padding-top: 60px;
+  }
+
+  .about__week_type_first {
+    flex-basis: 100px;
+  }
+
+  .about__week_type_other {
+    flex-basis: calc(100%-100px);
+  }
+
+  .about__week-lasts {
+    height: 35px;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about__week-title {
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: 13px;
+  }
 }

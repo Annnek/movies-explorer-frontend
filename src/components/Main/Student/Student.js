@@ -15,7 +15,7 @@ function Student() {
             marketing to IT department. My previous experience in marketing and
             project management helps me understand the real needs of the
             business as well as the specifics of product development, key
-            indicators, user and beneficiary expectations.
+            indicators.
           </p>
           <a href="https://github.com/Annnek" className="student__github">
             Github

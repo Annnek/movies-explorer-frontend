@@ -3,30 +3,30 @@ function Portfolio() {
     <section className="portfolio">
       <h2 className="portfolio__title">Портфолио</h2>
       <ul className="portfolio__list">
-        <li>
+        <li className="portfolio__item">
           <a
-            className="portfolio__link"
             href="https://github.com/Annnek/how-to-learn"
+            className="portfolio__link"
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noreferrer">
             Статичный сайт
           </a>
         </li>
-        <li>
+        <li className="portfolio__item">
           <a
-            className="portfolio__link"
             href="https://github.com/Annnek/russian-travel"
+            className="portfolio__link"
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noreferrer">
             Адаптивный сайт
           </a>
         </li>
-        <li>
+        <li className="portfolio__item">
           <a
+            href="https://github.com/Annnek/react-mesto-api-full-ghan"
             className="portfolio__link"
-            href="https://github.com/Annnek/react-mesto-api-full-gha"
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noreferrer">
             Одностраничное приложение
           </a>
         </li>

@@ -13,7 +13,7 @@
   font-size: 13px;
   line-height: 16px;
   text-align: center;
-  color: var(--color-grey);
+  color: var(--color-light-gray);
 }
 
 .footer__bottom {
@@ -55,4 +55,44 @@
 
 .footer__link:hover {
   opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 79px 30px 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .footer {
+    padding: 79px 10px 20px;
+  }
+
+  .footer__title {
+    padding-bottom: 21px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .footer__bottom {
+    padding-top: 30px;
+    flex-direction: column-reverse;
+  }
+
+  .footer__list {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer__coryright {
+    padding-top: 30px;
+    font-size: 12px;
+    line-height: 15px;
+    color: var(--color-light-gray);
+  }
+
+  .footer__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }
