@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import Header from "../Header/Header";
+
 import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
 import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
@@ -13,7 +12,6 @@ function App() {
   return (
     <div className="page">
       <div className="container">
-        <Header />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/signup" element={<Register />} />
@@ -24,7 +22,6 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/404" element={<Error404 />} />
         </Routes>
-        <Footer />
       </div>
     </div>
   );
