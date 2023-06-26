@@ -23,11 +23,6 @@
   transition: border 0.2s ease-out;
 }
 
-/* .form-search__input:focus {
-  outline: none;
-  border: 1.5px solid var(--color-white);
-} */
-
 .form-search__submit-btn {
   width: 44px;
   height: 44px;
