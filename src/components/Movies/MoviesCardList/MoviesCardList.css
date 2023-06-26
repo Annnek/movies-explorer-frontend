@@ -1,34 +1,40 @@
-.movies-card {
+.cards {
   padding: 80px 70px;
 }
 
-.movies-card__list {
+.cards__list {
   margin: 0;
   padding: 0;
   display: grid;
   justify-content: space-between;
   grid-template-columns: repeat(auto-fit, 360px);
-  grid-template-rows: minmax(245px);
+  grid-auto-rows: minmax(0, 270px);
   column-gap: 30px;
-  row-gap: 46px;
+  row-gap: 29px;
   list-style: none;
 }
 
-.movies-card__more-btn {
-  width: 100%;
-  margin: 80px 0 0 0;
+.cards__block-more {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0 0 0;
+}
+
+.cards__btn-more {
+  width: 320px;
+  height: 36px;
   padding: 10px;
   font-size: 12px;
   line-height: 15px;
   font-weight: 500;
   color: var(--color-white);
-  background-color: #2f2f2f;
-  border: none;
+  background-color: transparent;
+  border: 1px solid #424242;
   border-radius: 6px;
   cursor: pointer;
   transition: color 0.2s ease-out;
 }
 
-.movies-card__more-btn:hover {
+.cards__btn-more:hover {
   color: var(--color-white-hover);
 }
