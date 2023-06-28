@@ -1,5 +1,4 @@
 .checkbox {
-  margin: 0 auto;
   padding: 28px 0 39px;
   font-weight: 400;
   font-size: 12px;
@@ -7,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid #424242;
 }
 
 .checkbox_type_default {
@@ -43,4 +43,21 @@
 
 .checkbox_type_default:checked + .checkbox_type_custom::before {
   background-image: url("../../../images/smalltumb.svg");
+}
+
+@media screen and (max-width: 768px) {
+  .checkbox {
+    padding: 41px 0 40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .checkbox {
+    padding: 47px 0 40px;
+    font-size: 11px;
+  }
+
+  .checkbox_type_custom {
+    margin-right: 13px;
+  }
 }
