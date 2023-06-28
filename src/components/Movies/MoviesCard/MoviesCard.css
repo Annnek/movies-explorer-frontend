@@ -28,7 +28,7 @@
   line-height: 15px;
   font-weight: 500;
   white-space: nowrap;
-  overflow-y: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 

@@ -1,7 +1,7 @@
-import { saveCardList } from "../../../utils/constants";
+import { savedCardList } from "../../../utils/constants";
 
 function MoviesCard({ movieId, image, name, typeCardBtn }) {
-  const isSavedMovieCard = saveCardList.some((i) => i.movieId === movieId);
+  const isSavedMovieCard = savedCardList.some((i) => i.movieId === movieId);
 
   return (
     <li className="card">
