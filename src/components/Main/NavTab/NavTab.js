@@ -8,7 +8,7 @@ function NavTab() {
           </a>
         </li>
         <li className="navtab__item">
-          <a href="#tech" className="navtab__link">
+          <a href="#techs" className="navtab__link">
             Технологии
           </a>
         </li>

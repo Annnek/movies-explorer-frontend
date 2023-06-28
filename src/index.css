@@ -17,9 +17,13 @@
 @import url(./components/AuthForm/AuthForm.css);
 @import url(./components/Login/Login.css);
 @import url(./components/Register/Register.css);
+@import url(./components/Profile/Profile.css);
 
 /* Movies */
 @import url(./components/Movies/MoviesCard/MoviesCard.css);
 @import url(./components/Movies/MoviesCardList/MoviesCardList.css);
 @import url(./components/Movies/SearchForm/SearchForm.css);
 @import url(./components/Movies/FilterCheckbox/FilterCheckbox.css);
+
+/* error */
+@import url(./components/Error404/Error404.css);

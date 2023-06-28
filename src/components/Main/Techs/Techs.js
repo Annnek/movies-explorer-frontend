@@ -2,7 +2,7 @@ import SectionTitle from "../SectionTitle/SectionTitle.js";
 
 function Techs() {
   return (
-    <section id="techno" className="techs">
+    <section id="techs" className="techs">
       <SectionTitle>Технологии</SectionTitle>
       <div className="techs__container">
         <h3 className="techs__title">7 технологий</h3>
