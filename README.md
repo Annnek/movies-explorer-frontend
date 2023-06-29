@@ -7,13 +7,13 @@ Stack: JavaScript, React, JSX, HTML5, CSS3, БЭМ, Flexbox, Grid Layout, Figma.
 
 ### Состоит из двух частей:
 
----
-
 - [Backend](https://github.com/Annnek/movies-explorer-api)
 - Frontend :star: _этот репозиторий_
 
-[Ссылка на макет в Figma](<https://www.figma.com/file/ZSpS2ci06Zhy5NVXjoZLNa/Diploma-(Copy_Anna)?type=design&node-id=37256-12852&mode=design&t=x71nMR2wNlfCuIET-0>)
-[Результат по ссылке](https://bestfilms.nomoredomains.rocks)
+---
+
+- [Ссылка на макет в Figma](<https://www.figma.com/file/ZSpS2ci06Zhy5NVXjoZLNa/Diploma-(Copy_Anna)?type=design&node-id=37256-12852&mode=design&t=x71nMR2wNlfCuIET-0>)
+- [Результат по ссылке](https://bestfilms.nomoredomains.rocks)
 
 <!-- # Getting Started with Create React App
 

@@ -23,3 +23,36 @@
   font-weight: 500;
   text-decoration: none;
 }
+
+.navigation__btn-burger {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__btn-burger {
+    display: block;
+    background-image: url("../../images/burger_menu.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .navigation__btn-burger:hover {
+    opacity: 0.7;
+  }
+
+  .navigation__list {
+    display: none;
+  }
+  .navigation__profile {
+    display: none;
+  }
+}

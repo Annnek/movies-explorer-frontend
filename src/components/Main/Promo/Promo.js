@@ -1,5 +1,3 @@
-import "./Promo.css";
-
 function Promo() {
   return (
     <div className="promo">
