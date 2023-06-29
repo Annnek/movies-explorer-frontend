@@ -1,4 +1,21 @@
-# Getting Started with Create React App
+# **Веб-сервис поиска фильмов**
+
+Дипломный проект курса "Веб разработчик" от Яндекс Практикума.
+Функционал - личное портфолио, авторизация и регистрация пользователя, поиск и сохранение выбранных фильмов, удаление из сохраненных, фильтрация по параметрам
+
+Stack: JavaScript, React, JSX, HTML5, CSS3, БЭМ, Flexbox, Grid Layout, Figma.
+
+### Состоит из двух частей:
+
+---
+
+- [Backend](https://github.com/Annnek/movies-explorer-api)
+- Frontend :star: _этот репозиторий_
+
+[Ссылка на макет в Figma](<https://www.figma.com/file/ZSpS2ci06Zhy5NVXjoZLNa/Diploma-(Copy_Anna)?type=design&node-id=37256-12852&mode=design&t=x71nMR2wNlfCuIET-0>)
+[Результат по ссылке](https://bestfilms.nomoredomains.rocks)
+
+<!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -67,4 +84,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
