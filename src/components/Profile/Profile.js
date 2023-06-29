@@ -1,11 +1,17 @@
-// import React from "react";
-import "./Profile.css";
+import { useState, useEffect } from "react";
 import Header from "../Header/Header";
 
 function Profile() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Проверка, авторизован ли пользователь
+  useEffect(() => {
+    setIsLoggedIn(true);
+  }, []);
+
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <main className="profile">
         <h1 className="profile__title">Привет, Виталий!</h1>
         <form id="profile__form" className="profile__form">

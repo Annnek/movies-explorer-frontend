@@ -1,24 +1,29 @@
 import logo_header from "../../images/logo_header.svg";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Navigation from "../Navigation/Navigation";
 
-function Header() {
+function Header({ isLoggedIn }) {
   return (
-    <header className="header">
-      <NavLink to="/" exact>
+    <header className={`header ${isLoggedIn ? "header_black" : ""}`}>
+      <Link to="/" exact>
         <img
           src={logo_header}
           alt="логотип приложения"
           className="header__logo"
         />
-      </NavLink>
-      <div className="header__entrance">
-        <Link to="/signup" className="header__link">
-          Регистрация
-        </Link>
-        <Link to="/signin" className="header__button">
-          Войти
-        </Link>
-      </div>
+      </Link>
+      {isLoggedIn ? (
+        <Navigation />
+      ) : (
+        <div className="header__entrance">
+          <Link to="/signup" className="header__link">
+            Регистрация
+          </Link>
+          <Link to="/signin" className="header__button">
+            Войти
+          </Link>
+        </div>
+      )}
     </header>
   );
 }

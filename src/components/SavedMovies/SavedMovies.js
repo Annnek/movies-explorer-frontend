@@ -10,6 +10,7 @@ import { savedCardList } from "../../utils/constants";
 
 function SavedMovies() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function exampleTimeout() {
     return new Promise((resolve, reject) => {
@@ -55,9 +56,14 @@ function SavedMovies() {
   //     });
   // };
 
+  // Проверка, авторизован ли пользователь
+  useEffect(() => {
+    setIsLoggedIn(true);
+  }, []);
+
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <SearchForm />
       {isLoading ? (
         <Preloader />

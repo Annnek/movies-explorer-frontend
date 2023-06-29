@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { cardList } from "../../utils/constants";
-// import Header from "../Header/Header";
+import Header from "../Header/Header";
 import SearchForm from "./SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 
 function Movies() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function exampleTimeout() {
     return new Promise((resolve, reject) => {
@@ -35,8 +36,14 @@ function Movies() {
       });
   }, []);
 
+  // Проверка, авторизован ли пользователь
+  useEffect(() => {
+    setIsLoggedIn(true);
+  }, []);
+
   return (
     <>
+      <Header isLoggedIn={isLoggedIn} />
       <SearchForm />
       {isLoading ? (
         <Preloader />
