@@ -17,7 +17,11 @@ function Student() {
             business as well as the specifics of product development, key
             indicators.
           </p>
-          <a href="https://github.com/Annnek" className="student__github">
+          <a
+            href="https://github.com/Annnek"
+            className="student__github"
+            target="_blank"
+            rel="noopener noreferrer">
             Github
           </a>
         </div>

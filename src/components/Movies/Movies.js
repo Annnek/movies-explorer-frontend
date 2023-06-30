@@ -44,12 +44,14 @@ function Movies() {
   return (
     <>
       <Header isLoggedIn={isLoggedIn} />
-      <SearchForm />
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        <MoviesCardList cardList={cardList} typeCardBtn={{ save: true }} />
-      )}
+      <main>
+        <SearchForm />
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList cardList={cardList} typeCardBtn={{ save: true }} />
+        )}
+      </main>
       <Footer />
     </>
   );

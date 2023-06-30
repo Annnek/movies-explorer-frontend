@@ -15,7 +15,7 @@
 
 .profile__form {
   display: flex;
-  margin-top: 123px;
+  margin-top: 107px;
   flex-direction: column;
 }
 
@@ -60,46 +60,53 @@
   outline: none;
 }
 
-.profile__buttons {
+.profile__links {
   margin-top: 204px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
-.profile__button {
+.profile__link {
   background: transparent;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
   border: none;
+  text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
-.profile__button_type_edit {
+.profile__link:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.profile__link_type_edit {
   color: #ffffff;
 }
-.profile__button_type_exit {
+.profile__link_type_exit {
   margin-top: 16px;
   color: #ee3465;
 }
 
 @media screen and (max-width: 768px) {
   .profile {
-    padding: 235px 0 269px;
+    padding: 230px 0 269px;
   }
 
   .profile__form {
     margin-top: 79px;
   }
 
-  .profile__buttons {
+  .profile__links {
     margin-top: 194px;
   }
 }
 
 @media screen and (max-width: 440px) {
   .profile {
-    padding: 70px 10px 40px;
+    padding: 66px 10px 40px;
     width: 260px;
   }
 
@@ -113,10 +120,10 @@
     font-weight: 500;
   }
 
-  .profile__buttons {
+  .profile__links {
     margin-top: 363px;
   }
-  .profile__button {
+  .profile__link {
     font-size: 12px;
     line-height: 15px;
   }

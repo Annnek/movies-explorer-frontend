@@ -23,7 +23,7 @@ function Portfolio() {
         </li>
         <li className="portfolio__item">
           <a
-            href="https://github.com/Annnek/react-mesto-api-full-ghan"
+            href="https://github.com/Annnek/react-mesto-api-full-gha"
             className="portfolio__link"
             target="_blank"
             rel="noreferrer">

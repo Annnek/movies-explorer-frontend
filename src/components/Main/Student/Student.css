@@ -85,7 +85,6 @@
 
   .student__description {
     padding-top: 20px;
-    height: 112px;
     font-size: 12px;
     line-height: 18px;
   }
@@ -115,7 +114,7 @@
 
   .student__bio {
     padding-top: 40px;
-    max-width: 292px;
+    max-width: 100%;
   }
 
   .student__name {

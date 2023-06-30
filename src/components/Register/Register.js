@@ -3,7 +3,7 @@ import AuthForm from "../AuthForm/AuthForm";
 
 function Register() {
   return (
-    <>
+    <main className="main">
       <AuthForm
         typeForm="register"
         title="Добро пожаловать!"
@@ -16,7 +16,7 @@ function Register() {
           Войти
         </Link>
       </p>
-    </>
+    </main>
   );
 }
 

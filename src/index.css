@@ -29,7 +29,7 @@
 @import url(./components/Movies/FilterCheckbox/FilterCheckbox.css);
 
 /* error */
-@import url(./components/Error404/Error404.css);
+@import url(./components/NotFound/NotFound.css);
 
 @import url(./components/Preloader/Preloader.css);
 

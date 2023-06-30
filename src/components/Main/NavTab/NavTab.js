@@ -1,6 +1,6 @@
 function NavTab() {
   return (
-    <nav className="navtab">
+    <section className="navtab">
       <ul className="navtab__list">
         <li className="navtab__item">
           <a href="#about" className="navtab__link">
@@ -18,7 +18,7 @@ function NavTab() {
           </a>
         </li>
       </ul>
-    </nav>
+    </section>
   );
 }
 

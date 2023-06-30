@@ -39,23 +39,6 @@ function SavedMovies() {
       });
   }, []);
 
-  // const [savedMovies, setSavedMovies] = useState([]);
-
-  // useEffect(() => {
-  //   loadSavedMovies(); // Загрузка сохраненных фильмов при монтировании компонента
-  // }, []);
-
-  // const loadSavedMovies = () => {
-  //   // Здесь используем функцию для получения списка сохраненных фильмов из API или файла
-  //   getSavedMovies()
-  //     .then((movies) => {
-  //       setSavedMovies(movies); // Устанавливаем полученный список фильмов в состояние savedMovies
-  //     })
-  //     .catch((error) => {
-  //       console.error("Ошибка при загрузке сохраненных фильмов:", error);
-  //     });
-  // };
-
   // Проверка, авторизован ли пользователь
   useEffect(() => {
     setIsLoggedIn(true);
@@ -64,15 +47,17 @@ function SavedMovies() {
   return (
     <>
       <Header isLoggedIn={isLoggedIn} />
-      <SearchForm />
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        <MoviesCardList
-          cardList={savedCardList}
-          typeCardBtn={{ save: false }}
-        />
-      )}
+      <main className="main">
+        <SearchForm />
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+            cardList={savedCardList}
+            typeCardBtn={{ save: false }}
+          />
+        )}
+      </main>
       <Footer />
     </>
   );

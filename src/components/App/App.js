@@ -6,7 +6,7 @@ import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
-import Error404 from "../Error404/Error404";
+import NotFound from "../NotFound/NotFound";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path="/saved-movies" element={<SavedMovies />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<Navigate to="/" replace />} />
-          <Route path="/404" element={<Error404 />} />
+          <Route path="/404" element={<NotFound />} />
         </Routes>
       </div>
     </div>

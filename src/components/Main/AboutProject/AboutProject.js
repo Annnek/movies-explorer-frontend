@@ -21,14 +21,14 @@ function AboutProject() {
         </li>
       </ul>
       <div className="about__timing">
-        <div className="about__week about__week_type_first">
-          <span className="about__week-lasts about__week-lasts_type_first">
+        <div className="about__week about__week_left">
+          <span className="about__week-lasts about__week-lasts_left">
             1 неделя
           </span>
           <span className="about__week-title">Back-end</span>
         </div>
-        <div className="about__week about__week_type_other">
-          <span className="about__week-lasts about__week-lasts_type_other">
+        <div className="about__week about__week_right">
+          <span className="about__week-lasts about__week-lasts_right">
             4 недели
           </span>
           <span className="about__week-title">Front-end</span>

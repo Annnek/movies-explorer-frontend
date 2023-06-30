@@ -59,11 +59,7 @@
 
   .portfolio__link {
     font-size: 28px;
-    line-height: 50px;
     letter-spacing: -1.12px;
-    background-size: 18px 18px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
   }
 }
 
@@ -85,5 +81,6 @@
     font-size: 18px;
     line-height: 28px;
     letter-spacing: -0.72px;
+    background-size: 10px 10px;
   }
 }
