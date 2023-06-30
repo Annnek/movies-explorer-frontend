@@ -85,7 +85,7 @@
 
 @media screen and (max-width: 768px) {
   .profile {
-    padding: 236px 10px 269px;
+    padding: 235px 0 269px;
   }
 
   .profile__form {

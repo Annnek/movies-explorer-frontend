@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import accountIcon from "../../../images/ico_account.svg";
 
 function BurgerMenu({ onClick }) {
   return (
@@ -23,6 +24,11 @@ function BurgerMenu({ onClick }) {
       </ul>
       <Link to="/profile" className="burger__profile">
         Аккаунт
+        <img
+          src={accountIcon}
+          alt="Account Icon"
+          className="burger__profile-icon"
+        />
       </Link>
     </div>
   );

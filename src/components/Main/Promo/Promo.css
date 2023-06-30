@@ -1,7 +1,7 @@
 .promo {
   padding: 184px 0 224px;
   background-color: var(--color-dark-header);
-  background-image: url("../../../images/promo_landing.png");
+  background-image: url("../../../images/promo_landing.svg");
   background-position: center;
   background-repeat: no-repeat;
 }

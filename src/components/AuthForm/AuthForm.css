@@ -20,7 +20,7 @@
 
 .auth__title {
   margin: 0;
-  padding: 40px 0 16px;
+  padding: 37px 0 16px;
   font-size: 24px;
   line-height: 29px;
   font-weight: 500;
@@ -74,7 +74,7 @@
 }
 
 .auth__submit {
-  margin-top: 179px;
+  margin-top: 183px;
   padding: 0;
   height: 45px;
   font-style: normal;
@@ -91,7 +91,7 @@
 }
 
 .auth__submit_type_register {
-  margin-top: 134px;
+  margin-top: 117px;
 }
 
 .auth__submit:hover {
@@ -106,7 +106,8 @@
 } */
 
 .auth__text {
-  margin: 16px 0 0;
+  margin: 0;
+  padding: 16px 0 232px;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
@@ -143,24 +144,28 @@
   }
 
   .auth__title {
-    padding: 50px 0 56px;
+    padding: 45px 0 74px;
   }
 
   .auth__form {
     width: 100%;
   }
 
+  .auth__field {
+    margin-top: 6px;
+  }
+
   .auth__submit {
-    margin-top: 309px;
+    margin-top: 291px;
     font-size: 12px;
   }
 
   .auth__submit_type_register {
-    margin-top: 240px;
+    margin-top: 200px;
   }
 
   .auth__text {
-    margin: 16px 0 0;
+    padding: 16px 0 30px;
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;

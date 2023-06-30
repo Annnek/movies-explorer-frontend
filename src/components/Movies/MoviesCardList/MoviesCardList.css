@@ -53,6 +53,10 @@
     grid-auto-rows: minmax(0, 231px);
     row-gap: 47px;
   }
+
+  .cards__block-more {
+    padding: 60px 0 0 0;
+  }
 }
 
 @media screen and (max-width: 350px) {

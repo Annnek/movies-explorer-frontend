@@ -68,6 +68,11 @@
   border: none;
   border-radius: 3px;
   text-decoration: none;
+  transition: all 0.5s ease-out;
+}
+
+.header__button:hover {
+  background-color: var(--color-white);
 }
 
 @media screen and (max-width: 768px) {

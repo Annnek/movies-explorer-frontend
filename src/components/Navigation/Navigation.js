@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import accountIcon from "../../images/ico_account.svg";
 
 function Navigation() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -8,24 +9,6 @@ function Navigation() {
   const toggleBurgerMenu = () => {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
   };
-
-  // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  // useEffect(() => {
-  //   const handleWindowResize = () => {
-  //     setWindowWidth(window.innerWidth);
-  //   };
-
-  //   window.addEventListener("resize", handleWindowResize);
-
-  //   return () => {
-  //     window.removeEventListener("resize", handleWindowResize);
-  //   };
-  // }, []);
-
-  // if (windowWidth <= 768) {
-  //   return <BurgerMenu />;
-  // }
 
   return (
     <>
@@ -52,6 +35,11 @@ function Navigation() {
       </ul>
       <Link to="/profile" className="navigation__profile">
         Аккаунт
+        <img
+          src={accountIcon}
+          alt="Account Icon"
+          className="navigation__profile-icon"
+        />
       </Link>
     </>
   );
