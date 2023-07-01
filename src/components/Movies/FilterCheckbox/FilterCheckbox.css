@@ -25,6 +25,12 @@
   height: 20px;
   vertical-align: sub;
   border-radius: 20px;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.checkbox_type_custom:hover {
+  opacity: 0.7;
 }
 
 .checkbox_type_custom::before {

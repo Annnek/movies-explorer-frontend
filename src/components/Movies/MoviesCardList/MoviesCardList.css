@@ -32,11 +32,11 @@
   border: 1px solid #424242;
   border-radius: 6px;
   cursor: pointer;
-  transition: color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
 }
 
 .cards__btn-more:hover {
-  color: var(--color-white-hover);
+  background-color: var(--color-light-gray);
 }
 
 @media screen and (max-width: 768px) {

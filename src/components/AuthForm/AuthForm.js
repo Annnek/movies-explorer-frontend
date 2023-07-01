@@ -48,9 +48,6 @@ function AuthForm({ typeForm, title, buttonSubmitText }) {
           />
           <span className="auth__error"></span>
         </label>
-        {/* <button className="auth__submit" type="submit">
-          {buttonSubmitText}
-        </button> */}
         <button
           className={`auth__submit ${
             typeForm === "register" ? "auth__submit_type_register" : ""

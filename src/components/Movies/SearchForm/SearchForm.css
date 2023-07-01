@@ -25,6 +25,10 @@
   transition: border 0.2s ease-out;
 }
 
+.form-search__input:focus {
+  outline: 1px solid var(--color-blue);
+}
+
 .form-search__submit-btn {
   width: 44px;
   height: 44px;
