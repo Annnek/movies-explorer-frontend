@@ -3,7 +3,7 @@ import AuthForm from "../AuthForm/AuthForm";
 
 function Login() {
   return (
-    <main>
+    <main className="main">
       <AuthForm
         typeForm="login"
         title="Рады видеть!"

@@ -1,12 +1,12 @@
 import logo_header from "../../images/logo_header.svg";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function AuthForm({ typeForm, title, buttonSubmitText }) {
   return (
     <section className="auth">
-      <NavLink to="/" exact>
+      <Link to="/">
         <img src={logo_header} alt="логотип приложения" className="auth-logo" />
-      </NavLink>
+      </Link>
       <h2 className="auth__title">{title}</h2>
       <form className="auth__form" name={typeForm}>
         {typeForm === "register" && (
@@ -29,9 +29,9 @@ function AuthForm({ typeForm, title, buttonSubmitText }) {
             className="auth__input"
             name="email"
             placeholder="Введите Email"
-            minLength="2"
-            maxLength="40"
-            required
+            minLength={2}
+            maxLength={40}
+            required={true}
           />
           <span className="auth__error"></span>
         </label>
@@ -42,9 +42,9 @@ function AuthForm({ typeForm, title, buttonSubmitText }) {
             className="auth__input"
             name="password"
             placeholder="Введите Пароль"
-            minLength="2"
-            maxLength="40"
-            required
+            minLength={2}
+            maxLength={40}
+            required={true}
           />
           <span className="auth__error"></span>
         </label>

@@ -44,7 +44,7 @@ function Movies() {
   return (
     <>
       <Header isLoggedIn={isLoggedIn} />
-      <main>
+      <main className="main">
         <SearchForm />
         {isLoading ? (
           <Preloader />

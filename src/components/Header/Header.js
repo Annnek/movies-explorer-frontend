@@ -5,7 +5,7 @@ import Navigation from "../Navigation/Navigation";
 function Header({ isLoggedIn }) {
   return (
     <header className={`header ${isLoggedIn ? "header_black" : ""}`}>
-      <Link to="/" exact>
+      <Link to="/">
         <img
           src={logo_header}
           alt="логотип приложения"

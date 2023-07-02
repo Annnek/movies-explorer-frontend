@@ -23,6 +23,7 @@ function SearchForm() {
             className="form-search__input"
             onChange={handleChange}
             value={searchValue}
+            minLength="2"
             required
           />
           <button className="form-search__submit-btn"></button>
