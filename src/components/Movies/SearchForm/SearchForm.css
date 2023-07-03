@@ -48,13 +48,13 @@
   height: 55px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 890px) {
   .form-search {
     margin: 75px 30px 0;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 380px) {
   .form-search {
     margin: 75px 14px 0;
   }

@@ -51,13 +51,13 @@
   background-image: url("../../../images/smalltumb.svg");
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 890px) {
   .checkbox {
     padding: 41px 0 40px;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 380px) {
   .checkbox {
     padding: 47px 0 40px;
     font-size: 11px;

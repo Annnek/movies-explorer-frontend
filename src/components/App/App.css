@@ -11,11 +11,6 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
-  text-rendering: optimizeLegibility;
-
-  /* всегда показывать вертикальный скролл */
-  /* overflow: -moz-scrollbars-vertical;
-  overflow-y: scroll; */
 }
 
 .container {

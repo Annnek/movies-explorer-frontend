@@ -39,7 +39,7 @@
   background-color: var(--color-light-gray);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 890px) {
   .cards {
     padding: 80px 30px;
   }
@@ -59,7 +59,7 @@
   }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 380px) {
   .cards {
     padding: 50px 10px 80px;
   }

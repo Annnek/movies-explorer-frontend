@@ -95,7 +95,7 @@
   background-color: #313131;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 890px) {
   .card__img {
     height: 190px;
   }
@@ -112,7 +112,7 @@
   }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 380px) {
   .card__img {
     height: 168px;
   }
