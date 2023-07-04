@@ -1,0 +1,14 @@
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-light-gray: #8b8b8b;
+  --color-green: #3ddc84;
+  --color-dark-header: #073042;
+  --color-dark-main: #202020;
+  --color-gray: #303030;
+
+  --color-dark-support: #272727;
+  --color-dark-card-bg: #222222;
+  --color-blue: #4285f4;
+  --color-pink: #ee3465;
+}
