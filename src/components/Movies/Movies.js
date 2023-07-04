@@ -1,32 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { cardList } from "../../utils/constants";
+// import { cardList } from "../../utils/constants";
 import Header from "../Header/Header";
 import SearchForm from "./SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
+import { moviesApi } from "../../utils/MoviesApi";
 
 function Movies() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [movies, setMovies] = useState([]);
 
-  function exampleTimeout() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const response = {
-          data: cardList, // Пример данных, можно заменить на свои
-          status: 200, // Пример статуса ответа
-        };
-        resolve(response);
-      }, 100000); // Задержка в миллисекундах (в данном случае 2 секунды)
-    });
-  }
+  // function exampleTimeout() {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       const response = {
+  //         data: cardList, // Пример данных, можно заменить на свои
+  //         status: 200, // Пример статуса ответа
+  //       };
+  //       resolve(response);
+  //     }, 100000); // Задержка в миллисекундах (в данном случае 2 секунды)
+  //   });
+  // }
 
   useEffect(() => {
     setIsLoading(true);
-    exampleTimeout()
+    // exampleTimeout()
+    moviesApi
+      .getAllMovies()
       .then((res) => {
-        console.log(res);
+        setMovies(res);
       })
       .catch((err) => {
         console.error(err);
@@ -49,7 +53,7 @@ function Movies() {
         {isLoading ? (
           <Preloader />
         ) : (
-          <MoviesCardList cardList={cardList} typeCardBtn={{ save: true }} />
+          <MoviesCardList movies={movies} typeCardBtn={{ save: true }} />
         )}
       </main>
       <Footer />

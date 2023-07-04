@@ -1,7 +1,12 @@
 import { savedCardList } from "../../../utils/constants";
+import { moviesApi } from "../../../utils/MoviesApi";
 
-function MoviesCard({ movieId, image, name, typeCardBtn }) {
-  const isSavedMovieCard = savedCardList.some((i) => i.movieId === movieId);
+function MoviesCard({ movie, typeCardBtn }) {
+  const isSavedMovieCard = savedCardList.some(
+    (i) => i.movieId === movie.movieId,
+  );
+
+  const { duration, image, trailerLink, nameRU } = movie;
 
   return (
     <li className="card">
@@ -15,10 +20,20 @@ function MoviesCard({ movieId, image, name, typeCardBtn }) {
         }`}>
         {!typeCardBtn.save || isSavedMovieCard ? "" : "Сохранить"}
       </button>
-      <img src={image} alt={name} className="card__img" />
+      <a
+        className="card__link"
+        href={trailerLink}
+        target="_blank"
+        rel="noreferrer">
+        <img
+          src={image.url ? `${moviesApi._baseUrl}${image.url}` : image}
+          alt={nameRU}
+          className="card__img"
+        />
+      </a>
       <div className="card__header">
-        <h2 className="card__title">{name}</h2>
-        <p className="card__duration">1ч 17м</p>
+        <h2 className="card__title">{nameRU}</h2>
+        <p className="card__duration">{duration}</p>
       </div>
     </li>
   );
