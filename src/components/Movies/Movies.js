@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from "react";
-// import { cardList } from "../../utils/constants";
 import Header from "../Header/Header";
 import SearchForm from "./SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import { moviesApi } from "../../utils/MoviesApi";
+import { mainApi } from "../../utils/MainApi";
 
 function Movies() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [movies, setMovies] = useState([]);
 
-  // function exampleTimeout() {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       const response = {
-  //         data: cardList, // Пример данных, можно заменить на свои
-  //         status: 200, // Пример статуса ответа
-  //       };
-  //       resolve(response);
-  //     }, 100000); // Задержка в миллисекундах (в данном случае 2 секунды)
-  //   });
-  // }
-
   useEffect(() => {
     setIsLoading(true);
-    // exampleTimeout()
     moviesApi
       .getAllMovies()
       .then((res) => {
@@ -45,6 +32,18 @@ function Movies() {
     setIsLoggedIn(true);
   }, []);
 
+  const handleDeleteMovie = (movie) => {
+    mainApi
+      .deleteMovie(movie)
+      .then((res) => {
+        console.log("Фильм удален:", res);
+        setMovies(movies.filter((m) => m.movieId !== movie.movieId));
+      })
+      .catch((err) => {
+        console.error("Ошибка при удалении фильма:", err);
+      });
+  };
+
   return (
     <>
       <Header isLoggedIn={isLoggedIn} />
@@ -53,7 +52,11 @@ function Movies() {
         {isLoading ? (
           <Preloader />
         ) : (
-          <MoviesCardList movies={movies} typeCardBtn={{ save: true }} />
+          <MoviesCardList
+            movies={movies}
+            typeCardBtn={{ save: true }}
+            handleDeleteMovie={handleDeleteMovie}
+          />
         )}
       </main>
       <Footer />

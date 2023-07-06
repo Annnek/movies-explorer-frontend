@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard.js";
 
-function MoviesCardList({ movies, typeCardBtn }) {
+function MoviesCardList({ movies, typeCardBtn, handleDeleteMovie }) {
   const [showAll, setShowAll] = useState(false);
 
   const visibleMovies = showAll ? movies : movies.slice(0, 12); // Отображать все карточки или только первые 12
@@ -17,11 +17,8 @@ function MoviesCardList({ movies, typeCardBtn }) {
           <MoviesCard
             key={movie.movieId}
             movie={movie}
-            // movieId={card.movieId}
-            // duration={card.duration}
-            // image={card.image}
-            // name={card.nameRU}
             typeCardBtn={typeCardBtn}
+            handleDeleteMovie={handleDeleteMovie}
           />
         ))}
       </ul>

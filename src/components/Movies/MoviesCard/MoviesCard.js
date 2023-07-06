@@ -1,24 +1,47 @@
-import { savedCardList } from "../../../utils/constants";
-import { moviesApi } from "../../../utils/MoviesApi";
+import React, { useState } from "react";
+import { mainApi } from "../../../utils/MainApi";
 
-function MoviesCard({ movie, typeCardBtn }) {
-  const isSavedMovieCard = savedCardList.some(
-    (i) => i.movieId === movie.movieId,
-  );
+function MoviesCard({ movie }) {
+  // const isSavedMovieCard = savedCardList.some(
+  //   (i) => i.movieId === movie.movieId,
+  // );
 
   const { duration, image, trailerLink, nameRU } = movie;
+  const [isSaved, setIsSaved] = useState(false);
+
+  const handleSaveClick = () => {
+    setIsSaved(!isSaved);
+    if (!isSaved) {
+      // Отправить запрос на сохранение фильма
+      mainApi
+        .saveMovie(movie)
+        .then((res) => {
+          console.log("Фильм сохранен:", res);
+        })
+        .catch((err) => {
+          console.error("Ошибка при сохранении фильма:", err);
+        });
+    } else {
+      // Отправить запрос на удаление фильма
+      mainApi
+        .deleteMovie(movie)
+        .then((res) => {
+          console.log("Фильм удален:", res);
+        })
+        .catch((err) => {
+          console.error("Ошибка при удалении фильма:", err);
+        });
+    }
+  };
 
   return (
     <li className="card">
       <button
         className={`card__btn ${
-          !typeCardBtn.save
-            ? "card__btn_type_delete"
-            : isSavedMovieCard
-            ? "card__btn_saved"
-            : ""
-        }`}>
-        {!typeCardBtn.save || isSavedMovieCard ? "" : "Сохранить"}
+          isSaved ? "card__btn_type_saved" : "card__btn_type_save"
+        }`}
+        onClick={handleSaveClick}>
+        {isSaved ? "" : "Сохранить"}
       </button>
       <a
         className="card__link"
@@ -26,7 +49,7 @@ function MoviesCard({ movie, typeCardBtn }) {
         target="_blank"
         rel="noreferrer">
         <img
-          src={image.url ? `${moviesApi._baseUrl}${image.url}` : image}
+          src={image.url ? `${mainApi._baseUrl}${image.url}` : image}
           alt={nameRU}
           className="card__img"
         />

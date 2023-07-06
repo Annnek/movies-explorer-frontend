@@ -15,7 +15,7 @@ class MoviesApi {
 
   // загрузка фильмов с сервера:
   getAllMovies() {
-    return fetch(this._baseUrl, {
+    return fetch(`${this._baseUrl}/beatfilm-movies`, {
       method: "GET",
       headers: this._headers,
     }).then((res) => {
@@ -25,7 +25,7 @@ class MoviesApi {
 }
 
 export const moviesApi = new MoviesApi({
-  baseUrl: "https://api.nomoreparties.co/beatfilm-movies",
+  baseUrl: "https://api.nomoreparties.co",
   headers: {
     "Content-Type": "application/json",
   },

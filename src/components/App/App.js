@@ -7,9 +7,13 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import NotFound from "../NotFound/NotFound";
+// import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
+  // const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
+
   return (
+    // <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <div className="container">
         <Routes>
@@ -24,6 +28,7 @@ function App() {
         </Routes>
       </div>
     </div>
+    // </CurrentUserContext.Provider>
   );
 }
 

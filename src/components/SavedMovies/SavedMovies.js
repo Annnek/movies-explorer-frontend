@@ -5,31 +5,19 @@ import SearchForm from "../Movies/SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
-import { savedCardList } from "../../utils/constants";
-// import { getSavedMovies } from "../../utils/api"; // импортируем функцию удаления
+import { mainApi } from "../../utils/MainApi";
 
 function SavedMovies() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [savedMovies, setSavedMovies] = useState([]);
 
-  // function exampleTimeout() {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       const response = {
-  //         data: savedCardList, // Пример данных, можно заменить на свои
-  //         status: 200, // Пример статуса ответа
-  //       };
-  //       resolve(response);
-  //     }, 1000); // Задержка в миллисекундах (в данном случае 2 секунды)
-  //   });
-  // }
-
-  // Эмилируем загрузку фильмов
   useEffect(() => {
-    setIsLoading(true)
-      // exampleTimeout()
+    setIsLoading(true);
+    mainApi
+      .getSavedMovies()
       .then((res) => {
-        console.log(res);
+        setSavedMovies(res);
       })
       .catch((err) => {
         console.error(err);
@@ -44,6 +32,19 @@ function SavedMovies() {
     setIsLoggedIn(true);
   }, []);
 
+  const handleDeleteMovie = (movie) => {
+    mainApi
+      .deleteMovie(movie)
+      .then((res) => {
+        console.log("Фильм удален:", res);
+        // Обновить список сохраненных фильмов
+        setSavedMovies(savedMovies.filter((m) => m.movieId !== movie.movieId));
+      })
+      .catch((err) => {
+        console.error("Ошибка при удалении фильма:", err);
+      });
+  };
+
   return (
     <>
       <Header isLoggedIn={isLoggedIn} />
@@ -53,8 +54,9 @@ function SavedMovies() {
           <Preloader />
         ) : (
           <MoviesCardList
-            cardList={savedCardList}
+            movies={savedMovies}
             typeCardBtn={{ save: false }}
+            handleDeleteMovie={handleDeleteMovie}
           />
         )}
       </main>
