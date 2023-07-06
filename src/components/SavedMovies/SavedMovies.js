@@ -25,7 +25,7 @@ function SavedMovies() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [setSavedMovies]);
 
   // Проверка, авторизован ли пользователь
   useEffect(() => {

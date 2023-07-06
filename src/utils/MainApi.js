@@ -16,6 +16,7 @@ class MainApi {
   saveMovie(movie) {
     return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
+      credentials: "include",
       headers: this._headers,
       body: JSON.stringify(movie),
     }).then((res) => {
@@ -24,8 +25,9 @@ class MainApi {
   }
 
   deleteMovie(movie) {
-    return fetch(`${this._baseUrl}/movies/${movie.id}`, {
+    return fetch(`${this._baseUrl}/movies/${movie._id}`, {
       method: "DELETE",
+      credentials: "include",
       headers: this._headers,
     }).then((res) => {
       return this._handleSendingRequest(res);
@@ -35,6 +37,7 @@ class MainApi {
   getSavedMovies() {
     return fetch(`${this._baseUrl}/movies`, {
       method: "GET",
+      credentials: "include",
       headers: this._headers,
     }).then((res) => {
       return this._handleSendingRequest(res);

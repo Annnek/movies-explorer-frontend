@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { mainApi } from "../../../utils/MainApi";
+import { convertDuration } from "../../../utils/utils";
 
 function MoviesCard({ movie }) {
   // const isSavedMovieCard = savedCardList.some(
@@ -56,7 +57,7 @@ function MoviesCard({ movie }) {
       </a>
       <div className="card__header">
         <h2 className="card__title">{nameRU}</h2>
-        <p className="card__duration">{duration}</p>
+        <p className="card__duration">{convertDuration(+duration)}</p>
       </div>
     </li>
   );
