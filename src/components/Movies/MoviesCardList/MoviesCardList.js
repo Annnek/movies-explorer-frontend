@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard.js";
+import { filterMoviesByDuration } from "../../../utils/utils.js";
 
-function MoviesCardList({ movies, typeCardBtn, handleDeleteMovie }) {
+function MoviesCardList({
+  movies,
+  typeCardBtn,
+  handleDeleteMovie,
+  isShortsChecked,
+}) {
   const [visibleMovies, setVisibleMovies] = useState([]);
   const [visibleCount, setVisibleCount] = useState(12); // Количество отображаемых карточек
   const [loadMoreCount, setLoadMoreCount] = useState(3); // Количество подгружаемых карточек при нажатии на кнопку "Ещё"
+  // const [isFiltered, setIsFiltered] = useState(false); // Флаг фильтрации
 
   useEffect(() => {
     const screenWidth = window.innerWidth;
@@ -25,15 +32,18 @@ function MoviesCardList({ movies, typeCardBtn, handleDeleteMovie }) {
     setVisibleMovies(movies.slice(0, visibleCount));
   }, [movies, visibleCount]);
 
+  useEffect(() => {
+    if (isShortsChecked) {
+      const filteredMovies = filterMoviesByDuration(movies);
+      setVisibleMovies(filteredMovies.slice(0, visibleCount));
+    } else {
+      setVisibleMovies(movies.slice(0, visibleCount));
+    }
+  }, [movies, visibleCount, isShortsChecked]);
+
   const handleShowMore = () => {
     setVisibleCount((prevVisibleCount) => prevVisibleCount + loadMoreCount);
   };
-
-  // const visibleMovies = showAll ? movies : movies.slice(0, 12); // Отображать все карточки или только первые 12
-
-  // const handleShowMore = () => {
-  //   setShowAll(true);
-  // };
 
   return (
     <section className="cards">

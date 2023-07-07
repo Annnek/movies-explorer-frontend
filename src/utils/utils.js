@@ -9,3 +9,8 @@ export const convertDuration = (duration) => {
 
   return resultTime.join(" ");
 };
+
+//чекбокс - фильтрация короткометражек по длительности
+export const filterMoviesByDuration = (movies) => {
+  return movies.filter((movie) => movie.duration <= 40);
+};

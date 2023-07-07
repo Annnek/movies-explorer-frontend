@@ -1,17 +1,22 @@
 import { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm() {
+function SearchForm({ handleFilterChange }) {
   const [searchValue, setSearchValue] = useState("");
   const [isShortsChecked, setIsShortsChecked] = useState(false);
 
-  const handleChange = ({ target }) => {
-    setSearchValue(target.value);
+  const handleChange = ({ event }) => {
+    setSearchValue(event.target.value);
   };
 
   const handleShortsCheck = () => {
     setIsShortsChecked(!isShortsChecked);
+    handleFilterChange(!isShortsChecked);
   };
+
+  // useEffect(() => {
+  //   handleFilterChange(isShortsChecked);
+  // }, [isShortsChecked, handleFilterChange]);
 
   return (
     <section>
