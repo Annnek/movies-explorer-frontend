@@ -1,3 +1,4 @@
+// конвертирование минут в часы и минуты
 export const convertDuration = (duration) => {
   const hours = Math.trunc(duration / 60);
   const munutes = duration % 60;

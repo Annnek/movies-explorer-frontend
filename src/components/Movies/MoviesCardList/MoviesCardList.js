@@ -1,14 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard.js";
 
 function MoviesCardList({ movies, typeCardBtn, handleDeleteMovie }) {
-  const [showAll, setShowAll] = useState(false);
+  const [visibleMovies, setVisibleMovies] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(12); // Количество отображаемых карточек
+  const [loadMoreCount, setLoadMoreCount] = useState(3); // Количество подгружаемых карточек при нажатии на кнопку "Ещё"
 
-  const visibleMovies = showAll ? movies : movies.slice(0, 12); // Отображать все карточки или только первые 12
+  useEffect(() => {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= 500) {
+      setVisibleCount(5);
+      setLoadMoreCount(2);
+    } else if (screenWidth <= 1000) {
+      setVisibleCount(8);
+      setLoadMoreCount(2);
+    } else {
+      setVisibleCount(12);
+      setLoadMoreCount(3);
+    }
+  }, []);
+
+  useEffect(() => {
+    setVisibleMovies(movies.slice(0, visibleCount));
+  }, [movies, visibleCount]);
 
   const handleShowMore = () => {
-    setShowAll(true);
+    setVisibleCount((prevVisibleCount) => prevVisibleCount + loadMoreCount);
   };
+
+  // const visibleMovies = showAll ? movies : movies.slice(0, 12); // Отображать все карточки или только первые 12
+
+  // const handleShowMore = () => {
+  //   setShowAll(true);
+  // };
 
   return (
     <section className="cards">
@@ -22,7 +47,7 @@ function MoviesCardList({ movies, typeCardBtn, handleDeleteMovie }) {
           />
         ))}
       </ul>
-      {!showAll && movies.length > 12 && (
+      {movies.length > visibleCount && (
         <div className="cards__block-more">
           <button className="cards__btn-more" onClick={handleShowMore}>
             Ещё
