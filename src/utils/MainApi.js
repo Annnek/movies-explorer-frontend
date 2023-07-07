@@ -46,7 +46,8 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-  baseUrl: "https://api.nomoreparties.co",
+  // baseUrl: "https://api.bestfilms.nomoredomains.rocks",
+  baseUrl: "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
   },

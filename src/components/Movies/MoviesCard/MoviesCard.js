@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { moviesApi } from "../../../utils/MoviesApi";
 import { mainApi } from "../../../utils/MainApi";
 import { convertDuration } from "../../../utils/utils";
 
@@ -50,7 +51,7 @@ function MoviesCard({ movie }) {
         target="_blank"
         rel="noreferrer">
         <img
-          src={image.url ? `${mainApi._baseUrl}${image.url}` : image}
+          src={image.url ? `${moviesApi._baseUrl}${image.url}` : image}
           alt={nameRU}
           className="card__img"
         />
