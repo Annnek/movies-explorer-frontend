@@ -4,10 +4,6 @@ import { mainApi } from "../../../utils/MainApi";
 import { convertDuration } from "../../../utils/utils";
 
 function MoviesCard({ movie }) {
-  // const isSavedMovieCard = savedCardList.some(
-  //   (i) => i.movieId === movie.movieId,
-  // );
-
   const { duration, image, trailerLink, nameRU } = movie;
   const [isSaved, setIsSaved] = useState(false);
 
@@ -16,7 +12,19 @@ function MoviesCard({ movie }) {
     if (!isSaved) {
       // Отправить запрос на сохранение фильма
       mainApi
-        .saveMovie(movie)
+        .saveMovie({
+          country: movie.country,
+          director: movie.director,
+          duration: movie.duration,
+          year: movie.year,
+          description: movie.description,
+          image: `${mainApi._baseUrl}${movie.image.url}`,
+          trailerLink: movie.trailerLink,
+          thumbnail: `${mainApi._baseUrl}${movie.image.url}`,
+          movieId: movie.id,
+          nameRU: movie.nameRU,
+          nameEN: movie.nameEN,
+        })
         .then((res) => {
           console.log("Фильм сохранен:", res);
         })

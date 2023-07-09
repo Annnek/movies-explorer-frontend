@@ -7,11 +7,11 @@ function MoviesCardList({
   typeCardBtn,
   handleDeleteMovie,
   isShortsChecked,
+  // isResultSearch,
 }) {
   const [visibleMovies, setVisibleMovies] = useState([]);
   const [visibleCount, setVisibleCount] = useState(12); // Количество отображаемых карточек
   const [loadMoreCount, setLoadMoreCount] = useState(3); // Количество подгружаемых карточек при нажатии на кнопку "Ещё"
-  // const [isFiltered, setIsFiltered] = useState(false); // Флаг фильтрации
 
   useEffect(() => {
     const screenWidth = window.innerWidth;
@@ -47,6 +47,7 @@ function MoviesCardList({
 
   return (
     <section className="cards">
+      {/* {isResultSearch ? ( */}
       <ul className="cards__list">
         {visibleMovies.map((movie) => (
           <MoviesCard
@@ -57,6 +58,10 @@ function MoviesCardList({
           />
         ))}
       </ul>
+      {/* ) : (
+        <p className="cards__no-results">Ничего не найдено</p>
+      )} */}
+      {/* {movies.length > visibleCount && isResultSearch && ( */}
       {movies.length > visibleCount && (
         <div className="cards__block-more">
           <button className="cards__btn-more" onClick={handleShowMore}>

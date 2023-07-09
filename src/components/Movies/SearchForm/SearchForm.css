@@ -48,6 +48,15 @@
   height: 55px;
 }
 
+.form-search__error-message {
+  padding-top: 6px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  color: #ee3465;
+  line-height: 12px;
+}
+
 @media screen and (max-width: 890px) {
   .form-search {
     margin: 75px 30px 0;

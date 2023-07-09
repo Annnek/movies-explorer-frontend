@@ -14,3 +14,21 @@ export const convertDuration = (duration) => {
 export const filterMoviesByDuration = (movies) => {
   return movies.filter((movie) => movie.duration <= 40);
 };
+
+// запрос на поиск фильмов
+export const searchMoviesQuery = (movies, searchQuery) => {
+  const lowerQuery = searchQuery.toLowerCase(); //делает поиск регистронезависимым
+
+  // Проверяет, содержит ли поисковый запрос (lowerQuery) название фильма на русском или английском языке или описание description
+  return movies.filter((movie) => {
+    const lowerNameRU = movie.nameRU.toLowerCase();
+    const lowerNameEN = movie.nameEN.toLowerCase();
+    const lowerDescription = movie.description.toLowerCase();
+
+    return (
+      lowerNameRU.includes(lowerQuery) ||
+      lowerNameEN.includes(lowerQuery) ||
+      lowerDescription.includes(lowerQuery)
+    );
+  });
+};

@@ -25,13 +25,12 @@ function SearchForm({ handleFilterChange }) {
           <input
             type="text"
             placeholder="Фильм"
+            name="search-movies"
             className="form-search__input"
             onChange={handleChange}
             value={searchValue}
-            minLength="2"
-            required
           />
-          <button className="form-search__submit-btn"></button>
+          <button className="form-search__submit-btn" type="submit"></button>
         </label>
         <FilterCheckbox
           checkHandler={handleShortsCheck}
