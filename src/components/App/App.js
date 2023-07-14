@@ -38,7 +38,9 @@ function App() {
   const [infoTitle, setInfoTitle] = useState("Success");
   const [infoImage, setInfoImage] = useState(successImage);
 
-  const showHeaderAndFooter = pathname !== "/signup" && pathname !== "/signin";
+  const showHeader = pathname !== "/signup" && pathname !== "/signin";
+  const showFooter =
+    pathname !== "/signup" && pathname !== "/signin" && pathname !== "/profile";
 
   function closeAllPopups() {
     setIsInfoPopupOpen(false);
@@ -205,7 +207,7 @@ function App() {
       <div className="container">
         <CurrentUserContext.Provider value={currentUser}>
           {/* чтобы header не показывался на страницах регистрации и авторизации */}
-          {showHeaderAndFooter && <Header loggedIn={loggedIn} />}
+          {showHeader && <Header loggedIn={loggedIn} />}
           <main>
             <Routes>
               <Route path="/" element={<Main />} />
@@ -278,7 +280,7 @@ function App() {
             infoTitle={infoTitle}
             infoImage={infoImage}
           />
-          {showHeaderAndFooter && <Footer />}
+          {showFooter && <Footer />}
         </CurrentUserContext.Provider>
       </div>
     </div>

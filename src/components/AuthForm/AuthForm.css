@@ -80,11 +80,9 @@
   background-color: var(--color-pink);
 }
 
-/* .auth__api-error {
-  display: block;
-  color: red;
-  margin-bottom: 10px;
-} */
+.auth__error_active {
+  opacity: 1;
+}
 
 .auth__submit {
   margin-top: 142px;

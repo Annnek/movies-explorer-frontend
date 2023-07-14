@@ -8,7 +8,7 @@ const Profile = ({ signOut, handleUserUpdate, isLoading }) => {
   const [name, setName] = useState(currentUser.name);
   const [email, setEmail] = useState(currentUser.email);
   const [isDisabled, setIsDisabled] = useState(true);
-  const [isSimilarValues, setIsSimilarValues] = useState(true);
+  const [isSameValues, setIsSameValues] = useState(true);
 
   const { values, handleChange, errors, isValid, resetForm } =
     useFormValidation();
@@ -16,10 +16,10 @@ const Profile = ({ signOut, handleUserUpdate, isLoading }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!isSimilarValues) {
+    if (!isSameValues && isValid) {
       handleUserUpdate({
-        name: name,
-        email: email,
+        name: values.name || name,
+        email: values.email || email,
       });
       resetForm();
     }
@@ -35,7 +35,7 @@ const Profile = ({ signOut, handleUserUpdate, isLoading }) => {
     if (values.email) {
       email = values.email === currentUser.email;
     }
-    setIsSimilarValues(name && email);
+    setIsSameValues(name && email);
   }, [values.name, values.email, currentUser.name, currentUser.email]);
 
   useEffect(() => {
@@ -80,13 +80,14 @@ const Profile = ({ signOut, handleUserUpdate, isLoading }) => {
             className={`profile__input ${
               isDisabled || isLoading ? "profile__input_disabled" : ""
             }`}
-            value={`${values.name ? values.name : name}`}
+            value={values.name || name}
             onChange={handleChange}
             placeholder="Имя"
             required
             minLength="2"
             maxLength="30"
             pattern="^[a-zA-Zа-яёА-ЯЁ -]+$"
+            disabled={isDisabled || isLoading}
           />
         </div>
         <span className={`auth__error ${errors.name && "auth__error_active"}`}>
@@ -101,46 +102,38 @@ const Profile = ({ signOut, handleUserUpdate, isLoading }) => {
             className={`profile__input ${
               isDisabled || isLoading ? "profile__input_disabled" : ""
             }`}
-            value={`${values.email ? values.email : email}`}
+            value={values.email || email}
             onChange={handleChange}
             placeholder="Email"
             required
             pattern="^\S+@\S+\.\S+$"
+            disabled={isDisabled || isLoading}
           />
         </div>
         <span className={`auth__error ${errors.email && "auth__error_active"}`}>
           {errors.email || ""}
         </span>
-        <>
-          <div className="profile__wrapper">
-            <button
-              className={`profile__btn-submit links ${
-                isDisabled ? "profile__btn-submit_disabled" : ""
-              } ${
-                !isValid || isLoading || isSimilarValues
-                  ? "profile__submit-button_inactive"
-                  : ""
-              }`}
-              type="submit"
-              disabled={
-                !isValid || isLoading || isSimilarValues ? true : false
-              }>
-              Сохранить
-            </button>
-            <button
-              type="submit"
-              onClick={handleEditButton}
-              className="profile__btn-submit">
-              {isDisabled ? "Редактировать" : "Отменить"}
-            </button>
-            <button
-              type="button"
-              onClick={signOut}
-              className="profile__btn-exit">
-              Выйти из аккаунта
-            </button>
-          </div>
-        </>
+        <div className="profile__buttons">
+          <button
+            type="submit"
+            className={`profile__btn-submit ${
+              !isValid || isLoading || isSameValues
+                ? "profile__submit-button_inactive"
+                : ""
+            }`}
+            disabled={!isValid || isLoading || isSameValues}>
+            Сохранить
+          </button>
+          <button
+            type="button"
+            className="profile__btn-submit"
+            onClick={handleEditButton}>
+            {isDisabled ? "Редактировать" : "Отменить"}
+          </button>
+          <button type="button" className="profile__btn-exit" onClick={signOut}>
+            Выйти из аккаунта
+          </button>
+        </div>
       </form>
     </section>
   );
