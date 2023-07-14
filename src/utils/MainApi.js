@@ -82,7 +82,7 @@ export const getSavedMovies = () => {
       return data;
     });
 };
-export const likeMovie = (data) => {
+export const saveMovie = (data) => {
   return fetch(`${BASE__URL}/movies`, {
     method: "POST",
     headers: {

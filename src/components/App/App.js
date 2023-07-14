@@ -8,7 +8,7 @@ import NotFound from "../NotFound/NotFound";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
-import InfoTooltip from "../InfoToolTip/InfoToolTip";
+import InfoToolTip from "../InfoToolTip/InfoToolTip";
 import Footer from "../Footer/Footer";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -18,7 +18,7 @@ import {
   getUserInfo,
   updateUserInfo,
   getSavedMovies,
-  likeMovie,
+  saveMovie,
   deleteMovie,
 } from "../../utils/MainApi";
 import { getMovies } from "../../utils/MoviesApi";
@@ -101,7 +101,7 @@ function App() {
   }, [loggedIn]);
 
   function savedMovieList(movie) {
-    likeMovie(movie)
+    saveMovie(movie)
       .then((userMovie) => {
         setSavedMovies([userMovie, ...savedMovies]);
       })
@@ -272,7 +272,7 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
-          <InfoTooltip
+          <InfoToolTip
             isOpen={isInfoPopupOpen}
             onClose={closeAllPopups}
             infoTitle={infoTitle}

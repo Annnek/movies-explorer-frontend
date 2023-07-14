@@ -18,9 +18,9 @@ const Movies = ({
     localStorage.getItem("moviesSearch") || "",
   );
 
-  const [filtredMovies, setFiltredMovies] = useState(
-    localStorage.getItem("filtredMovies")
-      ? JSON.parse(localStorage.getItem("filtredMovies"))
+  const [filteredMovies, setFilteredMovies] = useState(
+    localStorage.getItem("filteredMovies")
+      ? JSON.parse(localStorage.getItem("filteredMovies"))
       : [],
   );
 
@@ -32,9 +32,9 @@ const Movies = ({
       movies = filterMoviesByDuration(filteredMovies);
     }
 
-    setFiltredMovies(movies);
+    setFilteredMovies(movies);
     localStorage.setItem("isShort", isChecked.toString());
-    localStorage.setItem("filtredMovies", JSON.stringify(movies));
+    localStorage.setItem("filteredMovies", JSON.stringify(movies));
     localStorage.setItem("moviesSearch", moviesSearch);
   }
 
@@ -56,8 +56,8 @@ const Movies = ({
         savedMovieList={savedMovieList}
         savedMovies={savedMovies}
         deleteMovieToList={deleteMovieToList}
-        movies={filtredMovies}
-        filtredMovies={filtredMovies}
+        movies={filteredMovies}
+        filteredMovies={filteredMovies}
       />
     </>
   );

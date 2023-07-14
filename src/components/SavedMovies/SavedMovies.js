@@ -18,7 +18,7 @@ const SavedMovies = ({
     setFilterString(moviesSearch);
   }, [moviesSearch]);
 
-  const filtredMovies = useMemo(() => {
+  const filteredMovies = useMemo(() => {
     return savedMovies.filter((movie) => {
       const filtredMovieInclude =
         movie.nameRU.toLowerCase().includes(filterString.toLowerCase()) ||
@@ -40,7 +40,7 @@ const SavedMovies = ({
       />
       <MoviesCardList
         isLoading={isLoading}
-        filtredMovies={filtredMovies}
+        filteredMovies={filteredMovies}
         savedMovieList={savedMovieList}
         savedMovies={savedMovies}
         deleteMovieToList={deleteMovieToList}

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import "./MoviesCardList.css";
 import { useLocation } from "react-router-dom";
 import Preloader from "../../Preloader/Preloader";
 
@@ -9,51 +8,54 @@ const MoviesCardList = ({
   savedMovieList,
   savedMovies,
   deleteMovieToList,
-  filtredMovies,
+  filteredMovies,
   isLoading,
 }) => {
   const { pathname } = useLocation();
 
-  const cards = pathname === "/movies" ? movies : filtredMovies;
+  const [visibleMovies, setVisibleMovies] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(12);
+  const [loadMoreCount, setLoadMoreCount] = useState(3);
 
-  const [paginate, setPaginate] = useState(0);
-  const [paginateButton, setPaginateButton] = useState(false);
-
+  // количество показываемых карточек на странице в зависимости от ширины экрана и сколько добавляется кнопкой Еще
   useEffect(() => {
-    changePaginate();
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= 500) {
+      setVisibleCount(5);
+      setLoadMoreCount(2);
+    } else if (screenWidth <= 1000) {
+      setVisibleCount(8);
+      setLoadMoreCount(2);
+    } else {
+      setVisibleCount(12);
+      setLoadMoreCount(3);
+    }
   }, []);
 
   useEffect(() => {
-    if (cards.length === 0) {
-      setPaginateButton(false);
+    if (pathname === "/movies") {
+      setVisibleMovies(movies.slice(0, visibleCount));
+    } else if (pathname === "/saved-movies") {
+      setVisibleMovies(filteredMovies.slice(0, visibleCount));
     }
-    if (paginate >= cards.length) setPaginateButton(false);
-    else return setPaginateButton(true);
-  }, [cards, paginate]);
+  }, [movies, filteredMovies, visibleCount, pathname]);
 
-  function changePaginate() {
-    if (window.innerWidth >= 1100) return setPaginate(12);
-    else if (window.innerWidth < 1100 && window.innerWidth <= 750)
-      return setPaginate(8);
-    else if (window.innerWidth < 750) return setPaginate(5);
-  }
-
-  function handlePaginate() {
-    if (window.innerWidth >= 1100) return setPaginate(paginate + 12);
-    else if (window.innerWidth < 1100) return setPaginate(paginate + 5);
-  }
+  const handleShowMore = () => {
+    setVisibleCount((prevVisibleCount) => prevVisibleCount + loadMoreCount);
+  };
 
   return (
     <section className="cards">
       {isLoading && <Preloader />}
-      {cards.length === 0 ? (
+      {visibleMovies.length === 0 ? (
         <p className="not-found">Ничего не найдено</p>
       ) : (
         <ul className="cards__list">
-          {cards.slice(0, paginate).map((card) => (
+          {visibleMovies.map((card) => (
             <MoviesCard
               card={card}
-              filtredMovies={filtredMovies}
+              filteredMovies={filteredMovies}
               savedMovieList={savedMovieList}
               savedMovies={savedMovies}
               deleteMovieToList={deleteMovieToList}
@@ -62,12 +64,13 @@ const MoviesCardList = ({
           ))}
         </ul>
       )}
-      {paginateButton && (
+      {visibleMovies.length <
+        (pathname === "/movies" ? movies.length : filteredMovies.length) && (
         <div className="cards__block-more">
           <button
             className="cards__btn-more"
             type="button"
-            onClick={handlePaginate}>
+            onClick={handleShowMore}>
             Еще
           </button>
         </div>
