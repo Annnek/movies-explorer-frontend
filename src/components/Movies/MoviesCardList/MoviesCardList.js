@@ -1,76 +1,79 @@
-import React, { useState, useEffect } from "react";
-import MoviesCard from "../MoviesCard/MoviesCard.js";
-import { filterMoviesByDuration } from "../../../utils/utils.js";
+import { useEffect, useState } from "react";
+import MoviesCard from "../MoviesCard/MoviesCard";
+import "./MoviesCardList.css";
+import { useLocation } from "react-router-dom";
+import Preloader from "../../Preloader/Preloader";
 
-function MoviesCardList({
+const MoviesCardList = ({
   movies,
-  typeCardBtn,
-  handleDeleteMovie,
-  isShortsChecked,
-  // isResultSearch,
-}) {
-  const [visibleMovies, setVisibleMovies] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(12); // Количество отображаемых карточек
-  const [loadMoreCount, setLoadMoreCount] = useState(3); // Количество подгружаемых карточек при нажатии на кнопку "Ещё"
+  savedMovieList,
+  savedMovies,
+  deleteMovieToList,
+  filtredMovies,
+  isLoading,
+}) => {
+  const { pathname } = useLocation();
+
+  const cards = pathname === "/movies" ? movies : filtredMovies;
+
+  const [paginate, setPaginate] = useState(0);
+  const [paginateButton, setPaginateButton] = useState(false);
 
   useEffect(() => {
-    const screenWidth = window.innerWidth;
-
-    if (screenWidth <= 500) {
-      setVisibleCount(5);
-      setLoadMoreCount(2);
-    } else if (screenWidth <= 1000) {
-      setVisibleCount(8);
-      setLoadMoreCount(2);
-    } else {
-      setVisibleCount(12);
-      setLoadMoreCount(3);
-    }
+    changePaginate();
   }, []);
 
   useEffect(() => {
-    setVisibleMovies(movies.slice(0, visibleCount));
-  }, [movies, visibleCount]);
-
-  useEffect(() => {
-    if (isShortsChecked) {
-      const filteredMovies = filterMoviesByDuration(movies);
-      setVisibleMovies(filteredMovies.slice(0, visibleCount));
-    } else {
-      setVisibleMovies(movies.slice(0, visibleCount));
+    if (cards.length === 0) {
+      setPaginateButton(false);
     }
-  }, [movies, visibleCount, isShortsChecked]);
+    if (paginate >= cards.length) setPaginateButton(false);
+    else return setPaginateButton(true);
+  }, [cards, paginate]);
 
-  const handleShowMore = () => {
-    setVisibleCount((prevVisibleCount) => prevVisibleCount + loadMoreCount);
-  };
+  function changePaginate() {
+    if (window.innerWidth >= 1100) return setPaginate(12);
+    else if (window.innerWidth < 1100 && window.innerWidth <= 750)
+      return setPaginate(8);
+    else if (window.innerWidth < 750) return setPaginate(5);
+  }
+
+  function handlePaginate() {
+    if (window.innerWidth >= 1100) return setPaginate(paginate + 12);
+    else if (window.innerWidth < 1100) return setPaginate(paginate + 5);
+  }
 
   return (
     <section className="cards">
-      {/* {isResultSearch ? ( */}
-      <ul className="cards__list">
-        {visibleMovies.map((movie) => (
-          <MoviesCard
-            key={movie.movieId}
-            movie={movie}
-            typeCardBtn={typeCardBtn}
-            handleDeleteMovie={handleDeleteMovie}
-          />
-        ))}
-      </ul>
-      {/* ) : (
-        <p className="cards__no-results">Ничего не найдено</p>
-      )} */}
-      {/* {movies.length > visibleCount && isResultSearch && ( */}
-      {movies.length > visibleCount && (
+      {isLoading && <Preloader />}
+      {cards.length === 0 ? (
+        <p className="not-found">Ничего не найдено</p>
+      ) : (
+        <ul className="cards__list">
+          {cards.slice(0, paginate).map((card) => (
+            <MoviesCard
+              card={card}
+              filtredMovies={filtredMovies}
+              savedMovieList={savedMovieList}
+              savedMovies={savedMovies}
+              deleteMovieToList={deleteMovieToList}
+              key={card.id || card.movieId}
+            />
+          ))}
+        </ul>
+      )}
+      {paginateButton && (
         <div className="cards__block-more">
-          <button className="cards__btn-more" onClick={handleShowMore}>
-            Ещё
+          <button
+            className="cards__btn-more"
+            type="button"
+            onClick={handlePaginate}>
+            Еще
           </button>
         </div>
       )}
     </section>
   );
-}
+};
 
 export default MoviesCardList;

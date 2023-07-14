@@ -2,9 +2,9 @@ import logo_header from "../../images/logo_header.svg";
 import { Link } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 
-function Header({ isLoggedIn }) {
+function Header({ loggedIn }) {
   return (
-    <header className={`header ${isLoggedIn ? "header_black" : ""}`}>
+    <header className={`header ${loggedIn ? "header_black" : ""}`}>
       <Link to="/">
         <img
           src={logo_header}
@@ -12,7 +12,7 @@ function Header({ isLoggedIn }) {
           className="header__logo"
         />
       </Link>
-      {isLoggedIn ? (
+      {loggedIn ? (
         <Navigation />
       ) : (
         <div className="header__entrance">

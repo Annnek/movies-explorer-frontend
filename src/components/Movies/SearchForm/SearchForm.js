@@ -1,26 +1,30 @@
-import { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm({ handleFilterChange }) {
-  const [searchValue, setSearchValue] = useState("");
-  const [isShortsChecked, setIsShortsChecked] = useState(false);
-
-  const handleChange = ({ event }) => {
-    setSearchValue(event.target.value);
+const SearchForm = ({
+  moviesSearch,
+  setMoviesSearch,
+  isChecked,
+  setIsChecked,
+  handleSearchMovies,
+}) => {
+  const handleChange = (e) => {
+    setMoviesSearch(e.target.value);
   };
 
-  const handleShortsCheck = () => {
-    setIsShortsChecked(!isShortsChecked);
-    handleFilterChange(!isShortsChecked);
+  const handleSubmit = (e) => {
+    if (!moviesSearch) return;
+    e.preventDefault();
+    handleSearchMovies(isChecked);
   };
 
-  // useEffect(() => {
-  //   handleFilterChange(isShortsChecked);
-  // }, [isShortsChecked, handleFilterChange]);
+  const handleCheckbox = () => {
+    handleSearchMovies(!isChecked);
+    setIsChecked(!isChecked);
+  };
 
   return (
     <section>
-      <form className="form-search">
+      <form className="form-search" onSubmit={handleSubmit}>
         <label className="form-search__wrapper">
           <input
             type="text"
@@ -28,17 +32,14 @@ function SearchForm({ handleFilterChange }) {
             name="search-movies"
             className="form-search__input"
             onChange={handleChange}
-            value={searchValue}
+            value={moviesSearch}
           />
           <button className="form-search__submit-btn" type="submit"></button>
         </label>
-        <FilterCheckbox
-          checkHandler={handleShortsCheck}
-          isChecked={isShortsChecked}
-        />
+        <FilterCheckbox checked={!isChecked} onChange={handleCheckbox} />
       </form>
     </section>
   );
-}
+};
 
 export default SearchForm;

@@ -1,68 +1,53 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import Header from "../Header/Header";
 import SearchForm from "../Movies/SearchForm/SearchForm";
-import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
-import Footer from "../Footer/Footer";
-import { mainApi } from "../../utils/MainApi";
+import { useCallback, useMemo, useState } from "react";
 
-function SavedMovies() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [savedMovies, setSavedMovies] = useState([]);
+const SavedMovies = ({
+  isLoading,
+  savedMovieList,
+  savedMovies,
+  deleteMovieToList,
+}) => {
+  const [isChecked, setIsChecked] = useState(true);
 
-  useEffect(() => {
-    setIsLoading(true);
-    mainApi
-      .getSavedMovies()
-      .then((res) => {
-        setSavedMovies(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [setSavedMovies]);
+  const [moviesSearch, setMoviesSearch] = useState("");
 
-  // Проверка, авторизован ли пользователь
-  useEffect(() => {
-    setIsLoggedIn(true);
-  }, []);
+  const [filterString, setFilterString] = useState("");
 
-  const handleDeleteMovie = (movie) => {
-    mainApi
-      .deleteMovie(movie)
-      .then((res) => {
-        console.log("Фильм удален:", res);
-        // Обновить список сохраненных фильмов
-        setSavedMovies(savedMovies.filter((m) => m.movieId !== movie.movieId));
-      })
-      .catch((err) => {
-        console.error("Ошибка при удалении фильма:", err);
-      });
-  };
+  const handleSearchMovies = useCallback(async () => {
+    setFilterString(moviesSearch);
+  }, [moviesSearch]);
+
+  const filtredMovies = useMemo(() => {
+    return savedMovies.filter((movie) => {
+      const filtredMovieInclude =
+        movie.nameRU.toLowerCase().includes(filterString.toLowerCase()) ||
+        movie.nameEN.toLowerCase().includes(filterString.toLowerCase());
+      return isChecked
+        ? filtredMovieInclude
+        : movie.duration < 40 && filtredMovieInclude;
+    });
+  }, [filterString, isChecked, savedMovies]);
 
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} />
-      <main className="main">
-        <SearchForm />
-        {isLoading ? (
-          <Preloader />
-        ) : (
-          <MoviesCardList
-            movies={savedMovies}
-            typeCardBtn={{ save: false }}
-            handleDeleteMovie={handleDeleteMovie}
-          />
-        )}
-      </main>
-      <Footer />
+      <SearchForm
+        moviesSearch={moviesSearch}
+        setMoviesSearch={setMoviesSearch}
+        handleSearchMovies={handleSearchMovies}
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+      />
+      <MoviesCardList
+        isLoading={isLoading}
+        filtredMovies={filtredMovies}
+        savedMovieList={savedMovieList}
+        savedMovies={savedMovies}
+        deleteMovieToList={deleteMovieToList}
+        handleSearchMovies={handleSearchMovies}
+      />
     </>
   );
-}
+};
 
 export default SavedMovies;

@@ -1,60 +1,118 @@
+import { Link, useLocation } from "react-router-dom";
 import logo_header from "../../images/logo_header.svg";
-import { Link } from "react-router-dom";
+import useFormValidation from "../../hooks/useFormValidation";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-function AuthForm({ typeForm, title, buttonSubmitText }) {
+function AuthForm({
+  title,
+  buttonSubmitText,
+  question,
+  toLink,
+  link,
+  registr,
+  loggedIn,
+  onSubmit,
+  isLoading,
+}) {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormValidation();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValid) {
+      onSubmit(values);
+    }
+  };
+
+  useEffect(() => {
+    if (loggedIn) resetForm();
+  }, [loggedIn, resetForm]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      navigate("/movies", { replace: true });
+    }
+  }, [navigate, loggedIn]);
+
   return (
     <section className="auth">
       <Link to="/">
         <img src={logo_header} alt="логотип приложения" className="auth-logo" />
       </Link>
       <h2 className="auth__title">{title}</h2>
-      <form className="auth__form" name={typeForm}>
-        {typeForm === "register" && (
+      <form className="auth__form" onSubmit={handleSubmit}>
+        {pathname === "/signup" && (
           <>
-            <label className="auth__field">
-              Имя
-              <input
-                type="text"
-                className="auth__input"
-                placeholder="Введите ваше имя"
-                required
-              />
-            </label>
+            <label className="auth__field">Имя</label>
+            <input
+              type="text"
+              name="name"
+              className={`auth__input ${
+                isLoading ? "auth__input_disabled" : ""
+              }`}
+              value={values.name || ""}
+              onChange={handleChange}
+              placeholder="Введите ваше имя"
+              required
+              minLength="2"
+              maxLength="30"
+              pattern="^[a-zA-Zа-яёА-ЯЁ -]+$"
+            />
+
+            <span
+              className={`auth__error ${errors.name && "auth__error_active"}`}>
+              {errors.name || ""}
+            </span>
           </>
         )}
-        <label className="auth__field">
-          E-mail
-          <input
-            type="email"
-            className="auth__input"
-            name="email"
-            placeholder="Введите Email"
-            minLength={2}
-            maxLength={40}
-            required={true}
-          />
-          <span className="auth__error"></span>
-        </label>
-        <label className="auth__field">
-          Пароль
-          <input
-            type="password"
-            className="auth__input"
-            name="password"
-            placeholder="Введите Пароль"
-            minLength={2}
-            maxLength={40}
-            required={true}
-          />
-          <span className="auth__error"></span>
-        </label>
+        <label className="auth__field">E-mail</label>
+        <input
+          type="email"
+          name="email"
+          className={`auth__input ${isLoading ? "auth__input_disabled" : ""}`}
+          placeholder="Введите Email"
+          value={values.email || ""}
+          onChange={handleChange}
+          required
+          pattern="^\S+@\S+\.\S+$"
+        />
+        <span className={`auth__error ${errors.email && "auth__error_active"}`}>
+          {errors.email || ""}
+        </span>
+
+        <label className="auth__field">Пароль</label>
+        <input
+          type="password"
+          name="password"
+          className={`auth__input ${isLoading ? "auth__input_disabled" : ""}`}
+          placeholder="Введите Пароль"
+          minLength="6"
+          value={values.password || ""}
+          onChange={handleChange}
+          required
+        />
+        <span
+          className={`auth__error ${errors.password && "auth__error_active"}`}>
+          {errors.password || ""}
+        </span>
+
         <button
-          className={`auth__submit ${
-            typeForm === "register" ? "auth__submit_type_register" : ""
-          }`}
-          type="submit">
+          className={`auth__submit ${!isValid && "auth__submit_disabled"} 
+					${registr ? "" : "auth__submit_type_login"}`}
+          type="submit"
+          disabled={!isValid}>
           {buttonSubmitText}
         </button>
+        <p className="auth__text">
+          {question}
+          <Link className="auth__link" to={toLink}>
+            {link}
+          </Link>
+        </p>
       </form>
     </section>
   );

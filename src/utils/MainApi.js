@@ -1,54 +1,120 @@
-class MainApi {
-  constructor(config) {
-    this._baseUrl = config.baseUrl; //адрес сервера
-    this._headers = config.headers; //заголовки запроса
-  }
+// export const BASE__URL = "https://api.bestfilms.nomoredomains.rocks";
+export const BASE__URL = "http://localhost:3000";
+export const API__URL = "https://api.nomoreparties.co/";
 
-  // Формирую запрос на сервер, если прошел не удачно, возвращаем ошибку!
-  _handleSendingRequest(res) {
-    if (res.ok) {
-      return Promise.resolve(res.json());
-    }
-    // Если ошибка пришла, отклоняем промис
-    return Promise.reject(`Ошибка: ${res.status}`);
+const getResponse = (res) => {
+  if (res.ok) {
+    return res.json();
   }
+  return Promise.reject(res.status);
+};
 
-  saveMovie(movie) {
-    return fetch(`${this._baseUrl}/movies`, {
-      method: "POST",
-      credentials: "include",
-      headers: this._headers,
-      body: JSON.stringify(movie),
-    }).then((res) => {
-      return this._handleSendingRequest(res);
+export const signUp = (data) => {
+  return fetch(`${BASE__URL}/signup`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    }),
+  })
+    .then(getResponse)
+    .then((data) => {
+      return data;
     });
-  }
+};
 
-  deleteMovie(movie) {
-    return fetch(`${this._baseUrl}/movies/${movie._id}`, {
-      method: "DELETE",
-      credentials: "include",
-      headers: this._headers,
-    }).then((res) => {
-      return this._handleSendingRequest(res);
+export const signIn = (data) => {
+  return fetch(`${BASE__URL}/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ password: data.password, email: data.email }),
+  })
+    .then(getResponse)
+    .then((data) => {
+      localStorage.setItem("jwt", data.token);
+      return data;
     });
-  }
+};
 
-  getSavedMovies() {
-    return fetch(`${this._baseUrl}/movies`, {
-      method: "GET",
-      credentials: "include",
-      headers: this._headers,
-    }).then((res) => {
-      return this._handleSendingRequest(res);
+export const getUserInfo = () => {
+  return fetch(`${BASE__URL}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  })
+    .then(getResponse)
+    .then((data) => {
+      return data;
     });
-  }
-}
+};
 
-export const mainApi = new MainApi({
-  // baseUrl: "https://api.bestfilms.nomoredomains.rocks",
-  baseUrl: "http://localhost:3000",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+export const updateUserInfo = (data) => {
+  return fetch(`${BASE__URL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+    body: JSON.stringify({ name: data.name, email: data.email }),
+  })
+    .then(getResponse)
+    .then((data) => {
+      return data;
+    });
+};
+
+export const getSavedMovies = () => {
+  return fetch(`${BASE__URL}/movies`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  })
+    .then(getResponse)
+    .then((data) => {
+      return data;
+    });
+};
+export const likeMovie = (data) => {
+  return fetch(`${BASE__URL}/movies`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+    body: JSON.stringify({
+      nameRU: data.nameRU,
+      nameEN: data.nameEN,
+      country: data.country,
+      duration: data.duration,
+      director: data.director,
+      year: data.year,
+      description: data.description,
+      image: `${API__URL}${data.image.url}`,
+      trailerLink: data.trailerLink,
+      thumbnail: `${API__URL}${data.image.formats.thumbnail.url}`,
+      movieId: data.id,
+    }),
+  }).then(getResponse);
+};
+
+export const deleteMovie = (movieId) => {
+  return fetch(`${BASE__URL}/movies/${movieId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  })
+    .then(getResponse)
+    .then((data) => {
+      return data;
+    });
+};
