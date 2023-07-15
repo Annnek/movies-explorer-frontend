@@ -1,5 +1,5 @@
-// export const BASE__URL = "https://api.bestfilms.nomoredomains.rocks";
-export const BASE__URL = "http://localhost:3000";
+export const BASE__URL = "https://api.bestfilms.nomoredomains.rocks";
+// export const BASE__URL = "http://localhost:3000";
 export const API__URL = "https://api.nomoreparties.co/";
 
 const getResponse = (res) => {
