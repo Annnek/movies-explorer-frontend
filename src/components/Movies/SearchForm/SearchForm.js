@@ -1,3 +1,4 @@
+import { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 const SearchForm = ({
@@ -7,13 +8,21 @@ const SearchForm = ({
   setIsChecked,
   handleSearchMovies,
 }) => {
+  const [isEmptyQuery, setIsEmptyQuery] = useState(false);
+
   const handleChange = (e) => {
     setMoviesSearch(e.target.value);
+    setIsEmptyQuery(false);
   };
 
   const handleSubmit = (e) => {
-    if (!moviesSearch) return;
     e.preventDefault();
+
+    if (!moviesSearch) {
+      setIsEmptyQuery(true); // Установить флаг пустого запроса, если поле пустое
+      return;
+    }
+
     handleSearchMovies(isChecked);
   };
 
@@ -36,6 +45,11 @@ const SearchForm = ({
           />
           <button className="form-search__submit-btn" type="submit"></button>
         </label>
+        {isEmptyQuery && (
+          <span className="form-search__error-message">
+            Нужно ввести ключевое слово
+          </span>
+        )}
         <FilterCheckbox checked={!isChecked} onChange={handleCheckbox} />
       </form>
     </section>

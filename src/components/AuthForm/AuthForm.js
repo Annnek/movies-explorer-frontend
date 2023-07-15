@@ -78,7 +78,7 @@ function AuthForm({
           value={values.email || ""}
           onChange={handleChange}
           required
-          pattern="[a-z0-9]+@[a-z]+\\.{1,1}[a-z]{2,}"
+          pattern="^\S+@\S+\.\S+$"
         />
         <span className={`auth__error ${errors.email && "auth__error_active"}`}>
           {errors.email || ""}
