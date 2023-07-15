@@ -1,7 +1,7 @@
 .auth {
   width: 396px;
   margin: 0 auto;
-  padding-top: 70px;
+  padding: 70px 0;
   display: flex;
   flex-direction: column;
 }
@@ -118,7 +118,7 @@
 
 .auth__text {
   margin: 0;
-  padding: 16px 0 30px;
+  padding: 16px 0 0;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
@@ -143,8 +143,12 @@
 
 @media screen and (max-width: 768px) {
   .auth {
-    padding-top: 232px;
+    padding: 232px 0;
   }
+}
+
+.auth__submit {
+  margin-top: 134px;
 }
 
 @media screen and (max-width: 430px) {

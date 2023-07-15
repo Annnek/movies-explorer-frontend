@@ -60,7 +60,8 @@ function AuthForm({
               required
               minLength="2"
               maxLength="30"
-              pattern="^[a-zA-Zа-яёА-ЯЁ -]+$"
+              autoComplete="off"
+              // pattern="^[a-zA-Zа-яёА-ЯЁ -]+$"
             />
 
             <span
@@ -77,6 +78,7 @@ function AuthForm({
           placeholder="Введите Email"
           value={values.email || ""}
           onChange={handleChange}
+          autoComplete="off"
           required
           pattern="^\S+@\S+\.\S+$"
         />
@@ -93,6 +95,7 @@ function AuthForm({
           minLength="6"
           value={values.password || ""}
           onChange={handleChange}
+          autoComplete="off"
           required
         />
         <span

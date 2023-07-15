@@ -86,6 +86,7 @@ const Profile = ({ signOut, handleUserUpdate, isLoading }) => {
             required
             minLength="2"
             maxLength="30"
+            autoComplete="off"
             pattern="^[a-zA-Zа-яёА-ЯЁ -]+$"
             disabled={isDisabled || isLoading}
           />
@@ -105,6 +106,7 @@ const Profile = ({ signOut, handleUserUpdate, isLoading }) => {
             value={values.email || email}
             onChange={handleChange}
             placeholder="Email"
+            autoComplete="off"
             required
             pattern="^\S+@\S+\.\S+$"
             disabled={isDisabled || isLoading}
