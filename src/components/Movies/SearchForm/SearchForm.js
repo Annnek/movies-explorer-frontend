@@ -33,7 +33,7 @@ const SearchForm = ({
 
   return (
     <section>
-      <form className="form-search" onSubmit={handleSubmit}>
+      <form className="form-search" onSubmit={handleSubmit} noValidate>
         <label className="form-search__wrapper">
           <input
             type="text"

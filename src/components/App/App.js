@@ -38,9 +38,13 @@ function App() {
   const [infoTitle, setInfoTitle] = useState("Success");
   const [infoImage, setInfoImage] = useState(successImage);
 
-  const showHeader = pathname !== "/signup" && pathname !== "/signin";
+  const showHeader =
+    pathname !== "/signup" && pathname !== "/signin" && pathname !== "/*";
   const showFooter =
-    pathname !== "/signup" && pathname !== "/signin" && pathname !== "/profile";
+    pathname !== "/signup" &&
+    pathname !== "/signin" &&
+    pathname !== "/profile" &&
+    pathname !== "/*";
 
   function closeAllPopups() {
     setIsInfoPopupOpen(false);

@@ -1,5 +1,6 @@
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 import { useCallback, useMemo, useState } from "react";
 
 const SavedMovies = ({
@@ -38,14 +39,18 @@ const SavedMovies = ({
         isChecked={isChecked}
         setIsChecked={setIsChecked}
       />
-      <MoviesCardList
-        isLoading={isLoading}
-        filteredMovies={filteredMovies}
-        savedMovieList={savedMovieList}
-        savedMovies={savedMovies}
-        deleteMovieToList={deleteMovieToList}
-        handleSearchMovies={handleSearchMovies}
-      />
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          isLoading={isLoading}
+          filteredMovies={filteredMovies}
+          savedMovieList={savedMovieList}
+          savedMovies={savedMovies}
+          deleteMovieToList={deleteMovieToList}
+          handleSearchMovies={handleSearchMovies}
+        />
+      )}
     </>
   );
 };

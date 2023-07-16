@@ -44,7 +44,7 @@ function AuthForm({
         <img src={logo_header} alt="логотип приложения" className="auth-logo" />
       </Link>
       <h2 className="auth__title">{title}</h2>
-      <form className="auth__form" onSubmit={handleSubmit}>
+      <form className="auth__form" onSubmit={handleSubmit} noValidate>
         {pathname === "/signup" && (
           <>
             <label className="auth__field">Имя</label>

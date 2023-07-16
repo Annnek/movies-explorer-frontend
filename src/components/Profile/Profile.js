@@ -70,7 +70,8 @@ const Profile = ({ signOut, handleUserUpdate, isLoading }) => {
       <form
         id="profile__form"
         className="profile__form"
-        onSubmit={handleSubmit}>
+        onSubmit={handleSubmit}
+        noValidate>
         <div className="profile__form-inputs">
           <label className="profile__label">Имя</label>
           <input
