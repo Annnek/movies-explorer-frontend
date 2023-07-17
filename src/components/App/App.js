@@ -10,6 +10,7 @@ import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import InfoToolTip from "../InfoToolTip/InfoToolTip";
 import Footer from "../Footer/Footer";
+import Preloader from "../Preloader/Preloader";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import {
@@ -32,6 +33,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isTokenChecked, setIsTokenChecked] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
@@ -66,8 +68,12 @@ function App() {
         .catch((err) => {
           console.log(err);
           signOut();
+        })
+        .finally(() => {
+          setIsTokenChecked(true);
         });
     } else {
+      setIsTokenChecked(true);
       signOut();
     }
   }, [loggedIn]);
@@ -209,83 +215,89 @@ function App() {
   return (
     <div className="page">
       <div className="container">
-        <CurrentUserContext.Provider value={currentUser}>
-          {/* чтобы header не показывался на страницах регистрации и авторизации */}
-          {showHeader && <Header loggedIn={loggedIn} />}
-          <main>
-            <Routes>
-              <Route path="/" element={<Main />} />
+        {isTokenChecked ? (
+          <CurrentUserContext.Provider value={currentUser}>
+            {/* чтобы header не показывался на страницах регистрации и авторизации */}
+            {showHeader && <Header loggedIn={loggedIn} />}
+            <main>
+              <Routes>
+                <Route path="/" element={<Main />} />
 
-              <Route
-                path="/movies"
-                element={
-                  <ProtectedRoute
-                    element={Movies}
-                    loggedIn={loggedIn}
-                    isLoading={isLoading}
-                    allMovies={allMovies}
-                    savedMovieList={savedMovieList}
-                    savedMovies={savedMovies}
-                    deleteMovieToList={deleteMovieToList}
-                  />
-                }
-              />
-              <Route
-                path="/saved-movies"
-                element={
-                  <ProtectedRoute
-                    element={SavedMovies}
-                    loggedIn={loggedIn}
-                    isLoading={isLoading}
-                    savedMovieList={savedMovieList}
-                    savedMovies={savedMovies}
-                    deleteMovieToList={deleteMovieToList}
-                  />
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute
-                    element={Profile}
-                    loggedIn={loggedIn}
-                    signOut={signOut}
-                    handleUserUpdate={handleUserUpdate}
-                    isLoading={isLoading}
-                  />
-                }
-              />
-              <Route
-                path="/signup"
-                element={
-                  <Register
-                    loggedIn={loggedIn}
-                    handleSignUp={handleSignUp}
-                    isLoading={isLoading}
-                  />
-                }
-              />
-              <Route
-                path="/signin"
-                element={
-                  <Login
-                    loggedIn={loggedIn}
-                    handleSignIn={handleSignIn}
-                    isLoading={isLoading}
-                  />
-                }
-              />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-          <InfoToolTip
-            isOpen={isInfoPopupOpen}
-            onClose={closeAllPopups}
-            infoTitle={infoTitle}
-            infoImage={infoImage}
-          />
-          {showFooter && <Footer />}
-        </CurrentUserContext.Provider>
+                <Route
+                  path="/movies"
+                  element={
+                    <ProtectedRoute
+                      element={Movies}
+                      loggedIn={loggedIn}
+                      isLoading={isLoading}
+                      allMovies={allMovies}
+                      savedMovieList={savedMovieList}
+                      savedMovies={savedMovies}
+                      deleteMovieToList={deleteMovieToList}
+                    />
+                  }
+                />
+                <Route
+                  path="/saved-movies"
+                  element={
+                    <ProtectedRoute
+                      element={SavedMovies}
+                      loggedIn={loggedIn}
+                      isLoading={isLoading}
+                      savedMovieList={savedMovieList}
+                      savedMovies={savedMovies}
+                      deleteMovieToList={deleteMovieToList}
+                    />
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute
+                      element={Profile}
+                      loggedIn={loggedIn}
+                      signOut={signOut}
+                      handleUserUpdate={handleUserUpdate}
+                      isLoading={isLoading}
+                    />
+                  }
+                />
+                <Route
+                  path="/signup"
+                  element={
+                    <Register
+                      loggedIn={loggedIn}
+                      handleSignUp={handleSignUp}
+                      isLoading={isLoading}
+                    />
+                  }
+                />
+                <Route
+                  path="/signin"
+                  element={
+                    <Login
+                      loggedIn={loggedIn}
+                      handleSignIn={handleSignIn}
+                      isLoading={isLoading}
+                    />
+                  }
+                />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+            <InfoToolTip
+              isOpen={isInfoPopupOpen}
+              onClose={closeAllPopups}
+              infoTitle={infoTitle}
+              infoImage={infoImage}
+            />
+            {showFooter && <Footer />}
+          </CurrentUserContext.Provider>
+        ) : (
+          <div className="preloader-wrapper">
+            <Preloader />
+          </div>
+        )}
       </div>
     </div>
   );
