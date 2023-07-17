@@ -27,7 +27,6 @@ const Movies = ({
 
   function handleSearchMovies(isChecked) {
     const filteredMovies = searchMoviesQuery(allMovies, moviesSearch);
-
     let movies = filteredMovies;
     if (isChecked) {
       movies = filterMoviesByDuration(filteredMovies);

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
 import Preloader from "../../Preloader/Preloader";
+import { BIG_SCREEN_SIZE, SMALL_SCREEN_SIZE } from "../../../utils/constants";
 
 const MoviesCardList = ({
   movies,
@@ -21,10 +22,10 @@ const MoviesCardList = ({
   useEffect(() => {
     const screenWidth = window.innerWidth;
 
-    if (screenWidth <= 500) {
+    if (screenWidth <= SMALL_SCREEN_SIZE) {
       setVisibleCount(5);
       setLoadMoreCount(2);
-    } else if (screenWidth <= 1000) {
+    } else if (screenWidth <= BIG_SCREEN_SIZE) {
       setVisibleCount(8);
       setLoadMoreCount(2);
     } else {

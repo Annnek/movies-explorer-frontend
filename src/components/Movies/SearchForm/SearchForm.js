@@ -50,7 +50,7 @@ const SearchForm = ({
             Нужно ввести ключевое слово
           </span>
         )}
-        <FilterCheckbox checked={!isChecked} onChange={handleCheckbox} />
+        <FilterCheckbox isChecked={isChecked} checkHandler={handleCheckbox} />
       </form>
     </section>
   );

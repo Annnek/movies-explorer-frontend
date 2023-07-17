@@ -1,6 +1,7 @@
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
+import { searchMoviesQuery, filterMoviesByDuration } from "../../utils/utils";
 import { useCallback, useMemo, useState } from "react";
 
 const SavedMovies = ({
@@ -19,16 +20,30 @@ const SavedMovies = ({
     setFilterString(moviesSearch);
   }, [moviesSearch]);
 
+  // const filteredMovies = useMemo(() => {
+  //   return savedMovies.filter((movie) => {
+  //     const filteredMovieInclude =
+  //       movie.nameRU.toLowerCase().includes(filterString.toLowerCase()) ||
+  //       movie.nameEN.toLowerCase().includes(filterString.toLowerCase());
+  //     return !isChecked
+  //       ? filteredMovieInclude
+  //       : movie.duration < 40 && filteredMovieInclude;
+  //   });
+  // }, [filterString, isChecked, savedMovies]);
+
   const filteredMovies = useMemo(() => {
-    return savedMovies.filter((movie) => {
-      const filtredMovieInclude =
-        movie.nameRU.toLowerCase().includes(filterString.toLowerCase()) ||
-        movie.nameEN.toLowerCase().includes(filterString.toLowerCase());
-      return isChecked
-        ? filtredMovieInclude
-        : movie.duration < 40 && filtredMovieInclude;
-    });
-  }, [filterString, isChecked, savedMovies]);
+    let movies = savedMovies;
+
+    if (moviesSearch) {
+      movies = searchMoviesQuery(movies, filterString);
+    }
+
+    if (isChecked) {
+      movies = filterMoviesByDuration(movies);
+    }
+
+    return movies;
+  }, [filterString, isChecked, savedMovies, moviesSearch]);
 
   return (
     <>
