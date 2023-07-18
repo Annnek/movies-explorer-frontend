@@ -39,9 +39,10 @@ const MoviesCardList = ({
     if (pathname === "/movies") {
       setVisibleMovies(movies.slice(0, visibleCount));
     } else if (pathname === "/saved-movies") {
-      setVisibleMovies(filteredMovies.slice(0, visibleCount));
+      setVisibleMovies(savedMovies.slice(0, visibleCount));
+      setVisibleCount(savedMovies.length);
     }
-  }, [movies, filteredMovies, visibleCount, pathname]);
+  }, [movies, savedMovies, visibleCount, pathname]);
 
   const handleShowMore = () => {
     setVisibleCount((prevVisibleCount) => prevVisibleCount + loadMoreCount);
@@ -67,17 +68,19 @@ const MoviesCardList = ({
           ))}
         </ul>
       )}
-      {visibleMovies.length <
-        (pathname === "/movies" ? movies.length : filteredMovies.length) && (
-        <div className="cards__block-more">
-          <button
-            className="cards__btn-more"
-            type="button"
-            onClick={handleShowMore}>
-            Еще
-          </button>
-        </div>
-      )}
+      {/* Рендерим кнопку "Еще" только на странице /movies */}
+      {pathname === "/movies" &&
+        visibleMovies.length <
+          (pathname === "/movies" ? movies.length : filteredMovies.length) && (
+          <div className="cards__block-more">
+            <button
+              className="cards__btn-more"
+              type="button"
+              onClick={handleShowMore}>
+              Еще
+            </button>
+          </div>
+        )}
     </section>
   );
 };
