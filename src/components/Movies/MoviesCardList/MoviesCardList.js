@@ -21,18 +21,23 @@ const MoviesCardList = ({
 
   // количество показываемых карточек на странице в зависимости от ширины экрана и сколько добавляется кнопкой Еще
   useEffect(() => {
-    const screenWidth = window.innerWidth;
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
 
-    if (screenWidth <= SMALL_SCREEN_SIZE) {
-      setVisibleCount(5);
-      setLoadMoreCount(2);
-    } else if (screenWidth <= BIG_SCREEN_SIZE) {
-      setVisibleCount(8);
-      setLoadMoreCount(2);
-    } else {
-      setVisibleCount(12);
-      setLoadMoreCount(3);
-    }
+      if (screenWidth <= SMALL_SCREEN_SIZE) {
+        setVisibleCount(5);
+      } else if (screenWidth <= BIG_SCREEN_SIZE) {
+        setVisibleCount(8);
+      } else {
+        setVisibleCount(12);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -45,6 +50,16 @@ const MoviesCardList = ({
   }, [movies, savedMovies, visibleCount, pathname]);
 
   const handleShowMore = () => {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= SMALL_SCREEN_SIZE) {
+      setLoadMoreCount(2);
+    } else if (screenWidth <= BIG_SCREEN_SIZE) {
+      setLoadMoreCount(2);
+    } else {
+      setLoadMoreCount(3);
+    }
+
     setVisibleCount((prevVisibleCount) => prevVisibleCount + loadMoreCount);
   };
 
