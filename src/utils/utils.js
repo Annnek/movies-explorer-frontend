@@ -1,3 +1,5 @@
+import { SHORT_MOVIES_DURATION } from "./constants";
+
 // конвертирование минут в часы и минуты
 export const convertDuration = (duration) => {
   const hours = Math.trunc(duration / 60);
@@ -12,7 +14,7 @@ export const convertDuration = (duration) => {
 
 //чекбокс - фильтрация короткометражек по длительности
 export const filterMoviesByDuration = (movies) => {
-  return movies.filter((movie) => movie.duration <= 40);
+  return movies.filter((movie) => movie.duration <= SHORT_MOVIES_DURATION);
 };
 
 // запрос на поиск фильмов

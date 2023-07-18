@@ -61,6 +61,7 @@ function AuthForm({
               minLength="2"
               maxLength="30"
               autoComplete="off"
+              disabled={isLoading}
               // pattern="^[a-zA-Zа-яёА-ЯЁ -]+$"
             />
 
@@ -80,6 +81,7 @@ function AuthForm({
           onChange={handleChange}
           autoComplete="off"
           required
+          disabled={isLoading}
           pattern="^\S+@\S+\.\S+$"
         />
         <span className={`auth__error ${errors.email && "auth__error_active"}`}>
@@ -97,6 +99,7 @@ function AuthForm({
           onChange={handleChange}
           autoComplete="off"
           required
+          disabled={isLoading}
         />
         <span
           className={`auth__error ${errors.password && "auth__error_active"}`}>

@@ -2,7 +2,15 @@ import { useEffect, useState } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
 import Preloader from "../../Preloader/Preloader";
-import { BIG_SCREEN_SIZE, SMALL_SCREEN_SIZE } from "../../../utils/constants";
+import {
+  BIG_SCREEN_SIZE,
+  SMALL_SCREEN_SIZE,
+  CARDS_QUANTITY_DESKTOP,
+  CARDS_QUANTITY_TABLET,
+  CARDS_QUANTITY_MOBILE,
+  CARDS_MORE_DESKTOP,
+  CARDS_MORE_MOBILE,
+} from "../../../utils/constants";
 
 const MoviesCardList = ({
   movies,
@@ -16,8 +24,8 @@ const MoviesCardList = ({
   const { pathname } = useLocation();
 
   const [visibleMovies, setVisibleMovies] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(12);
-  const [loadMoreCount, setLoadMoreCount] = useState(3);
+  const [visibleCount, setVisibleCount] = useState(CARDS_QUANTITY_DESKTOP);
+  const [loadMoreCount, setLoadMoreCount] = useState(CARDS_MORE_DESKTOP);
 
   // количество показываемых карточек на странице в зависимости от ширины экрана и сколько добавляется кнопкой Еще
   useEffect(() => {
@@ -25,11 +33,11 @@ const MoviesCardList = ({
       const screenWidth = window.innerWidth;
 
       if (screenWidth <= SMALL_SCREEN_SIZE) {
-        setVisibleCount(5);
+        setVisibleCount(CARDS_QUANTITY_MOBILE);
       } else if (screenWidth <= BIG_SCREEN_SIZE) {
-        setVisibleCount(8);
+        setVisibleCount(CARDS_QUANTITY_TABLET);
       } else {
-        setVisibleCount(12);
+        setVisibleCount(CARDS_QUANTITY_DESKTOP);
       }
     };
 
@@ -53,11 +61,11 @@ const MoviesCardList = ({
     const screenWidth = window.innerWidth;
 
     if (screenWidth <= SMALL_SCREEN_SIZE) {
-      setLoadMoreCount(2);
+      setLoadMoreCount(CARDS_MORE_MOBILE);
     } else if (screenWidth <= BIG_SCREEN_SIZE) {
-      setLoadMoreCount(2);
+      setLoadMoreCount(CARDS_MORE_MOBILE);
     } else {
-      setLoadMoreCount(3);
+      setLoadMoreCount(CARDS_MORE_DESKTOP);
     }
 
     setVisibleCount((prevVisibleCount) => prevVisibleCount + loadMoreCount);
