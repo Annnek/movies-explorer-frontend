@@ -1,4 +1,10 @@
-import { useNavigate, Route, Routes, useLocation } from "react-router-dom";
+import {
+  useNavigate,
+  Route,
+  Routes,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -262,24 +268,33 @@ function App() {
                     />
                   }
                 />
+                {/* если пользователь залогинен, нельзя перейти напрямую на страницы регистрации и авторизации */}
                 <Route
                   path="/signup"
                   element={
-                    <Register
-                      loggedIn={loggedIn}
-                      handleSignUp={handleSignUp}
-                      isLoading={isLoading}
-                    />
+                    loggedIn ? (
+                      <Navigate to="/" />
+                    ) : (
+                      <Register
+                        loggedIn={loggedIn}
+                        handleSignUp={handleSignUp}
+                        isLoading={isLoading}
+                      />
+                    )
                   }
                 />
                 <Route
                   path="/signin"
                   element={
-                    <Login
-                      loggedIn={loggedIn}
-                      handleSignIn={handleSignIn}
-                      isLoading={isLoading}
-                    />
+                    loggedIn ? (
+                      <Navigate to="/" />
+                    ) : (
+                      <Login
+                        loggedIn={loggedIn}
+                        handleSignIn={handleSignIn}
+                        isLoading={isLoading}
+                      />
+                    )
                   }
                 />
                 <Route path="*" element={<NotFound />} />
@@ -294,9 +309,7 @@ function App() {
             {showFooter && <Footer />}
           </CurrentUserContext.Provider>
         ) : (
-          <div className="preloader-wrapper">
-            <Preloader />
-          </div>
+          <Preloader />
         )}
       </div>
     </div>

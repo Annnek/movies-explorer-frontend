@@ -10,7 +10,7 @@ const SavedMovies = ({
   savedMovies,
   deleteMovieToList,
 }) => {
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
 
   const [moviesSearch, setMoviesSearch] = useState("");
 
@@ -19,17 +19,6 @@ const SavedMovies = ({
   const handleSearchMovies = useCallback(async () => {
     setFilterString(moviesSearch);
   }, [moviesSearch]);
-
-  // const filteredMovies = useMemo(() => {
-  //   return savedMovies.filter((movie) => {
-  //     const filteredMovieInclude =
-  //       movie.nameRU.toLowerCase().includes(filterString.toLowerCase()) ||
-  //       movie.nameEN.toLowerCase().includes(filterString.toLowerCase());
-  //     return !isChecked
-  //       ? filteredMovieInclude
-  //       : movie.duration < 40 && filteredMovieInclude;
-  //   });
-  // }, [filterString, isChecked, savedMovies]);
 
   const filteredMovies = useMemo(() => {
     let movies = savedMovies;

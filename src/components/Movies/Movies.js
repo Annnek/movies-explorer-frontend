@@ -25,6 +25,8 @@ const Movies = ({
       : [],
   );
 
+  const [isSearchExecuted, setIsSearchExecuted] = useState(false);
+
   function handleSearchMovies(isChecked) {
     const filteredMovies = searchMoviesQuery(allMovies, moviesSearch);
     let movies = filteredMovies;
@@ -36,6 +38,8 @@ const Movies = ({
     localStorage.setItem("isShort", isChecked.toString());
     localStorage.setItem("filteredMovies", JSON.stringify(movies));
     localStorage.setItem("moviesSearch", moviesSearch);
+
+    setIsSearchExecuted(true);
   }
 
   useEffect(() => {
@@ -61,6 +65,7 @@ const Movies = ({
           deleteMovieToList={deleteMovieToList}
           movies={filteredMovies}
           filteredMovies={filteredMovies}
+          isSearchExecuted={isSearchExecuted}
         />
       )}
     </>

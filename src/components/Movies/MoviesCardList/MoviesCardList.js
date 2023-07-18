@@ -11,6 +11,7 @@ const MoviesCardList = ({
   deleteMovieToList,
   filteredMovies,
   isLoading,
+  isSearchExecuted,
 }) => {
   const { pathname } = useLocation();
 
@@ -49,8 +50,9 @@ const MoviesCardList = ({
   return (
     <section className="cards">
       {isLoading && <Preloader />}
-      {visibleMovies.length === 0 ? (
-        <p className="not-found">Ничего не найдено</p>
+      {/* Надпись появляется только после поиска, сначлаа пустой экран */}
+      {isSearchExecuted && visibleMovies.length === 0 ? (
+        <p className="cards__not-found">Ничего не найдено</p>
       ) : (
         <ul className="cards__list">
           {visibleMovies.map((card) => (

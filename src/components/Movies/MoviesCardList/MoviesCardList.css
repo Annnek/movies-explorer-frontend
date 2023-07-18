@@ -39,6 +39,17 @@
   background-color: var(--color-light-gray);
 }
 
+.cards__not-found {
+  margin: 0;
+  margin-top: 40px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
 @media screen and (max-width: 890px) {
   .cards {
     padding: 80px 30px;
@@ -52,17 +63,6 @@
     grid-template-columns: repeat(auto-fit, 339px);
     grid-auto-rows: minmax(0, 231px);
     row-gap: 47px;
-  }
-
-  .cards__no-results {
-    font-size: 20px;
-    font-weight: 400;
-    line-height: normal;
-    display: block;
-    width: 100%;
-    margin: 0;
-    margin-top: 40px;
-    text-align: center;
   }
 
   .cards__block-more {
@@ -81,7 +81,7 @@
     row-gap: 39px;
   }
 
-  .cards__no-results {
+  .cards__not-found {
     font-size: 16px;
   }
 }
