@@ -121,7 +121,7 @@ const Profile = ({ signOut, handleUserUpdate, isLoading }) => {
             type="submit"
             className={`profile__btn-submit ${
               !isValid || isLoading || isSameValues
-                ? "profile__submit-button_inactive"
+                ? "profile__btn-submit_inactive"
                 : ""
             }`}
             disabled={!isValid || isLoading || isSameValues}>
