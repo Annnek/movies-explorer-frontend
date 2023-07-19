@@ -1,60 +1,75 @@
-import React, { useEffect, useState } from "react";
-import { cardList } from "../../utils/constants";
-import Header from "../Header/Header";
+import { useEffect, useState } from "react";
+import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import SearchForm from "./SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
-import MoviesCardList from "./MoviesCardList/MoviesCardList";
-import Footer from "../Footer/Footer";
+import { searchMoviesQuery, filterMoviesByDuration } from "../../utils/utils";
 
-function Movies() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const Movies = ({
+  isLoading,
+  savedMovieList,
+  deleteMovieToList,
+  savedMovies,
+  allMovies,
+}) => {
+  const [isChecked, setIsChecked] = useState(
+    localStorage.getItem("isShort") === "true",
+  );
 
-  function exampleTimeout() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const response = {
-          data: cardList, // Пример данных, можно заменить на свои
-          status: 200, // Пример статуса ответа
-        };
-        resolve(response);
-      }, 100000); // Задержка в миллисекундах (в данном случае 2 секунды)
-    });
+  const [moviesSearch, setMoviesSearch] = useState(
+    localStorage.getItem("moviesSearch") || "",
+  );
+
+  const [filteredMovies, setFilteredMovies] = useState(
+    localStorage.getItem("filteredMovies")
+      ? JSON.parse(localStorage.getItem("filteredMovies"))
+      : [],
+  );
+
+  const [isSearchExecuted, setIsSearchExecuted] = useState(false);
+
+  function handleSearchMovies(isChecked) {
+    const filteredMovies = searchMoviesQuery(allMovies, moviesSearch);
+    let movies = filteredMovies;
+    if (isChecked) {
+      movies = filterMoviesByDuration(filteredMovies);
+    }
+
+    setFilteredMovies(movies);
+    localStorage.setItem("isShort", isChecked.toString());
+    localStorage.setItem("filteredMovies", JSON.stringify(movies));
+    localStorage.setItem("moviesSearch", moviesSearch);
+
+    setIsSearchExecuted(true);
   }
 
   useEffect(() => {
-    setIsLoading(true);
-    exampleTimeout()
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
-  // Проверка, авторизован ли пользователь
-  useEffect(() => {
-    setIsLoggedIn(true);
-  }, []);
+    localStorage.setItem("isShort", isChecked.toString());
+  }, [isChecked]);
 
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} />
-      <main className="main">
-        <SearchForm />
-        {isLoading ? (
-          <Preloader />
-        ) : (
-          <MoviesCardList cardList={cardList} typeCardBtn={{ save: true }} />
-        )}
-      </main>
-      <Footer />
+      <SearchForm
+        moviesSearch={moviesSearch}
+        setMoviesSearch={setMoviesSearch}
+        handleSearchMovies={handleSearchMovies}
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+      />
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          isLoading={isLoading}
+          savedMovieList={savedMovieList}
+          savedMovies={savedMovies}
+          deleteMovieToList={deleteMovieToList}
+          movies={filteredMovies}
+          filteredMovies={filteredMovies}
+          isSearchExecuted={isSearchExecuted}
+        />
+      )}
     </>
   );
-}
+};
 
 export default Movies;

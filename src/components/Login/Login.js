@@ -1,21 +1,17 @@
-import { Link } from "react-router-dom";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Login() {
+function Login({ handleSignIn, isLoading }) {
   return (
-    <main className="main">
-      <AuthForm
-        typeForm="login"
-        title="Рады видеть!"
-        buttonSubmitText="Войти"
-      />
-      <p className="auth__text">
-        Ещё не зарегистрированы?
-        <Link to="/signup" className="auth__link">
-          Регистрация
-        </Link>
-      </p>
-    </main>
+    <AuthForm
+      title="Рады видеть!"
+      buttonSubmitText="Войти"
+      question="Ещё не зарегистрированы?"
+      link="Регистрация"
+      toLink="/signup"
+      registr={false}
+      onSubmit={handleSignIn}
+      isLoading={isLoading}
+    />
   );
 }
 

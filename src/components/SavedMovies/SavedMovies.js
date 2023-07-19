@@ -1,66 +1,62 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import Header from "../Header/Header";
 import SearchForm from "../Movies/SearchForm/SearchForm";
-import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
-import Footer from "../Footer/Footer";
-import { savedCardList } from "../../utils/constants";
-// import { getSavedMovies } from "../../utils/api"; // импортируем функцию удаления
+import Preloader from "../Preloader/Preloader";
+import { searchMoviesQuery, filterMoviesByDuration } from "../../utils/utils";
+import { useCallback, useMemo, useState } from "react";
 
-function SavedMovies() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const SavedMovies = ({
+  isLoading,
+  savedMovieList,
+  savedMovies,
+  deleteMovieToList,
+}) => {
+  const [isChecked, setIsChecked] = useState(false);
 
-  function exampleTimeout() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const response = {
-          data: savedCardList, // Пример данных, можно заменить на свои
-          status: 200, // Пример статуса ответа
-        };
-        resolve(response);
-      }, 1000); // Задержка в миллисекундах (в данном случае 2 секунды)
-    });
-  }
+  const [moviesSearch, setMoviesSearch] = useState("");
 
-  // Эмилируем загрузку фильмов
-  useEffect(() => {
-    setIsLoading(true);
-    exampleTimeout()
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+  const [filterString, setFilterString] = useState("");
 
-  // Проверка, авторизован ли пользователь
-  useEffect(() => {
-    setIsLoggedIn(true);
-  }, []);
+  const handleSearchMovies = useCallback(async () => {
+    setFilterString(moviesSearch);
+  }, [moviesSearch]);
+
+  const filteredMovies = useMemo(() => {
+    let movies = savedMovies;
+
+    if (moviesSearch) {
+      movies = searchMoviesQuery(movies, filterString);
+    }
+
+    if (isChecked) {
+      movies = filterMoviesByDuration(movies);
+    }
+
+    return movies;
+  }, [filterString, isChecked, savedMovies, moviesSearch]);
 
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} />
-      <main className="main">
-        <SearchForm />
-        {isLoading ? (
-          <Preloader />
-        ) : (
-          <MoviesCardList
-            cardList={savedCardList}
-            typeCardBtn={{ save: false }}
-          />
-        )}
-      </main>
-      <Footer />
+      <SearchForm
+        moviesSearch={moviesSearch}
+        setMoviesSearch={setMoviesSearch}
+        handleSearchMovies={handleSearchMovies}
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+      />
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          isLoading={isLoading}
+          filteredMovies={filteredMovies}
+          savedMovieList={savedMovieList}
+          savedMovies={savedMovies}
+          deleteMovieToList={deleteMovieToList}
+          handleSearchMovies={handleSearchMovies}
+        />
+      )}
     </>
   );
-}
+};
 
 export default SavedMovies;

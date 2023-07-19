@@ -1,40 +1,59 @@
 import { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm() {
-  const [searchValue, setSearchValue] = useState("");
-  const [isShortsChecked, setIsShortsChecked] = useState(false);
+const SearchForm = ({
+  moviesSearch,
+  setMoviesSearch,
+  isChecked,
+  setIsChecked,
+  handleSearchMovies,
+}) => {
+  const [isEmptyQuery, setIsEmptyQuery] = useState(false);
 
-  const handleChange = ({ target }) => {
-    setSearchValue(target.value);
+  const handleChange = (e) => {
+    setMoviesSearch(e.target.value);
+    setIsEmptyQuery(false);
   };
 
-  const handleShortsCheck = () => {
-    setIsShortsChecked(!isShortsChecked);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!moviesSearch) {
+      setIsEmptyQuery(true); // Установить флаг пустого запроса, если поле пустое
+      return;
+    }
+
+    handleSearchMovies(isChecked);
+  };
+
+  const handleCheckbox = () => {
+    handleSearchMovies(!isChecked);
+    setIsChecked(!isChecked);
   };
 
   return (
     <section>
-      <form className="form-search">
+      <form className="form-search" onSubmit={handleSubmit} noValidate>
         <label className="form-search__wrapper">
           <input
             type="text"
             placeholder="Фильм"
+            name="search-movies"
             className="form-search__input"
             onChange={handleChange}
-            value={searchValue}
-            minLength="2"
-            required
+            value={moviesSearch}
           />
-          <button className="form-search__submit-btn"></button>
+          <button className="form-search__submit-btn" type="submit"></button>
         </label>
-        <FilterCheckbox
-          checkHandler={handleShortsCheck}
-          isChecked={isShortsChecked}
-        />
+        {isEmptyQuery && (
+          <span className="form-search__error-message">
+            Нужно ввести ключевое слово
+          </span>
+        )}
+        <FilterCheckbox isChecked={isChecked} checkHandler={handleCheckbox} />
       </form>
     </section>
   );
-}
+};
 
 export default SearchForm;

@@ -2,7 +2,7 @@
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .burger {
     padding: 159px 10px 90px;
     box-sizing: border-box;

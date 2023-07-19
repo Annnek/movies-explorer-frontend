@@ -4,6 +4,11 @@
   position: relative;
 }
 
+.card__link {
+  display: block;
+  cursor: pointer;
+}
+
 .card__img {
   display: block;
   width: 100%;
@@ -66,6 +71,27 @@
   color: var(--color-white-hover);
 }
 
+/* .card__btn_type_save {
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 0.2s ease-out;
+} */
+.card__btn_type_saved {
+  width: 21px;
+  height: 21px;
+  background-image: url("../../../images/btn_card_saved.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 0.2s ease-out;
+}
+
+.card__btn_type_saved:hover {
+  background-image: url("../../../images/btn_delete.svg");
+  background-color: #313131;
+}
+
 .card__btn_type_delete {
   width: 21px;
   height: 21px;
@@ -78,21 +104,6 @@
 
 .card__btn_type_delete:hover {
   background-size: 12px 12px;
-}
-
-.card__btn_saved {
-  width: 21px;
-  height: 21px;
-  background-image: url("../../../images/btn_card_saved.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: all 0.2s ease-out;
-}
-
-.card__btn_saved:hover {
-  background-image: url("../../../images/btn_delete.svg");
-  background-color: #313131;
 }
 
 @media screen and (max-width: 890px) {

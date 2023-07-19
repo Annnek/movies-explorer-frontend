@@ -38,7 +38,7 @@
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .navigation__btn-burger {
     display: block;
     background-image: url("../../images/burger_menu.svg");
