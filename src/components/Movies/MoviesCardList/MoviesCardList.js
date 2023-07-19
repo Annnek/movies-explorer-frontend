@@ -34,10 +34,13 @@ const MoviesCardList = ({
 
       if (screenWidth <= SMALL_SCREEN_SIZE) {
         setVisibleCount(CARDS_QUANTITY_MOBILE);
+        setLoadMoreCount(CARDS_MORE_MOBILE);
       } else if (screenWidth <= BIG_SCREEN_SIZE) {
         setVisibleCount(CARDS_QUANTITY_TABLET);
+        setLoadMoreCount(CARDS_MORE_MOBILE);
       } else {
         setVisibleCount(CARDS_QUANTITY_DESKTOP);
+        setLoadMoreCount(CARDS_MORE_DESKTOP);
       }
     };
 
@@ -52,22 +55,12 @@ const MoviesCardList = ({
     if (pathname === "/movies") {
       setVisibleMovies(movies.slice(0, visibleCount));
     } else if (pathname === "/saved-movies") {
-      setVisibleMovies(savedMovies.slice(0, visibleCount));
-      setVisibleCount(savedMovies.length);
+      setVisibleMovies(filteredMovies.slice(0, visibleCount));
+      setVisibleCount(filteredMovies.length);
     }
-  }, [movies, savedMovies, visibleCount, pathname]);
+  }, [movies, filteredMovies, visibleCount, pathname]);
 
   const handleShowMore = () => {
-    const screenWidth = window.innerWidth;
-
-    if (screenWidth <= SMALL_SCREEN_SIZE) {
-      setLoadMoreCount(CARDS_MORE_MOBILE);
-    } else if (screenWidth <= BIG_SCREEN_SIZE) {
-      setLoadMoreCount(CARDS_MORE_MOBILE);
-    } else {
-      setLoadMoreCount(CARDS_MORE_DESKTOP);
-    }
-
     setVisibleCount((prevVisibleCount) => prevVisibleCount + loadMoreCount);
   };
 
